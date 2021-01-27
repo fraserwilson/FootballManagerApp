@@ -8,12 +8,20 @@ class SummaryPage extends StatefulWidget {
 class _SummaryPageState extends State<SummaryPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('PLayers, Playstyle and formation(Plus image) shows here'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('SUMMARY PAGE'),
+        centerTitle: true,
+        backgroundColor: Colors.black,
+      ),
+      body: Center(
+        child: Text('PLayers, Playstyle and formation(Plus image) shows here'),
+      ),
     );
   }
 }
 
 Future navigateToSummarypage(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => SummaryPage()));
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => SummaryPage()));
 }
