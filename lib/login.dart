@@ -12,7 +12,9 @@ class _LoginInScreenState extends State<LoginInScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          SizedBox(height: 50.0,),
+          SizedBox(
+            height: 50.0,
+          ),
           Center(
             child: CircleAvatar(
               backgroundImage: AssetImage('assets/soccerball.jpg'),
@@ -20,51 +22,67 @@ class _LoginInScreenState extends State<LoginInScreen> {
               radius: 60.0,
             ),
           ),
-          SizedBox(height: 50.0,),
+          SizedBox(
+            height: 50.0,
+          ),
           TextField(
             obscureText: false,
-            style: TextStyle(
-                fontSize: 20.0
-            ),
+            style: TextStyle(fontSize: 20.0),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               hintText: 'Username',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(70.0)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(70.0)),
             ),
           ),
-          SizedBox(height: 30.0,),
+          SizedBox(
+            height: 30.0,
+          ),
           TextField(
             obscureText: true,
-            style: TextStyle(
-                fontSize: 20.0
-            ),
+            style: TextStyle(fontSize: 20.0),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               hintText: 'Password',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(30.0)),
             ),
           ),
-          SizedBox(height: 30.0,),
+          SizedBox(
+            height: 30.0,
+          ),
           Material(
             elevation: 5.0,
             borderRadius: BorderRadius.circular(30.0),
             child: MaterialButton(
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              onPressed: (){
+              onPressed: () {
                 navigateToSquadList(context);
               },
               color: Colors.black,
-              child: Text("Login",
+              child: Text(
+                "Login",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           )
         ],
       ),
     );
+  }
+}
+
+class Authenticate extends StatefulWidget {
+  @override
+  _AuthenticateState createState() => _AuthenticateState();
+}
+
+class _AuthenticateState extends State<Authenticate> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

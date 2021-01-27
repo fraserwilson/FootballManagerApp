@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "213820825486",
+    "project_id": "footballmanager-19022",
+    "storage_bucket": "footballmanager-19022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213820825486:android:23cc0972baad4f414a8edf",
+        "android_client_info": {
+          "package_name": "com.example.easy_learning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213820825486-pdroi66uqidbjlm6ppu62gpok13elo99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwZqNwlqIjQMPGG99eR2x8WF5kG3-Rzac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213820825486-pdroi66uqidbjlm6ppu62gpok13elo99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213820825486:android:371fbf9ba065c2144a8edf",
+        "android_client_info": {
+          "package_name": "com.example.screens_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213820825486-pdroi66uqidbjlm6ppu62gpok13elo99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwZqNwlqIjQMPGG99eR2x8WF5kG3-Rzac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213820825486-pdroi66uqidbjlm6ppu62gpok13elo99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

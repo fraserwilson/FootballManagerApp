@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:screens_ui/wrapper.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,6 +12,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LoginInScreen());
+    return MaterialApp(home: Wrapper());
   }
 }
