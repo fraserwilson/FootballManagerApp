@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'squad_list.dart';
+import 'package:screens_ui/services/auth.dart';
+import '../squad_list.dart';
 
 class LoginInScreen extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class LoginInScreen extends StatefulWidget {
 }
 
 class _LoginInScreenState extends State<LoginInScreen> {
+  final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +57,16 @@ class _LoginInScreenState extends State<LoginInScreen> {
             elevation: 5.0,
             borderRadius: BorderRadius.circular(30.0),
             child: MaterialButton(
-              minWidth: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              onPressed: () {
-                navigateToSquadList(context);
+              padding: EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+              onPressed: () async {
+                dynamic result = await _authService.signInAnon();
+                if (result == null) {
+                  print("error signing in");
+                } else {
+                  print("User signed in");
+                  print(result.uid);
+                }
+                //navigateToSquadList(context);
               },
               color: Colors.black,
               child: Text(
@@ -72,17 +80,5 @@ class _LoginInScreenState extends State<LoginInScreen> {
         ],
       ),
     );
-  }
-}
-
-class Authenticate extends StatefulWidget {
-  @override
-  _AuthenticateState createState() => _AuthenticateState();
-}
-
-class _AuthenticateState extends State<Authenticate> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

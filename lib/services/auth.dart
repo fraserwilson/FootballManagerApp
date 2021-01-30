@@ -1,14 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:screens_ui/models/user.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  //create a user object based on a Firebase User
+
+  ConvertedUser _userFromFirebaseUser(User user) {
+    return user != null ? ConvertedUser(uid: user.uid) : null;
+  }
+
+  //auth changes user streams
+  Stream<ConvertedUser> get streamuser {
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
+  }
 
   //sign in anonumously
   Future signInAnon() async {
     try {
       UserCredential result = await _auth.signInAnonymously();
       User user = result.user;
-      return user;
+      return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
       return null;
@@ -20,5 +32,12 @@ class AuthService {
   //register email pasword
 
   //sign out
-
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
