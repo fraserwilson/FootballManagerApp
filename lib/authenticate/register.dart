@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'package:screens_ui/shared/loading.dart';
-//import '../squad_list.dart';
 
-class LoginInScreen extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  LoginInScreen({this.toggleView});
+  Register({this.toggleView});
   @override
-  _LoginInScreenState createState() => _LoginInScreenState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginInScreenState extends State<LoginInScreen> {
+class _RegisterState extends State<Register> {
   final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-
-  //text field states
   String email = '';
   String password = '';
   String error = ' ';
@@ -25,14 +22,14 @@ class _LoginInScreenState extends State<LoginInScreen> {
         ? Loading()
         : Scaffold(
             appBar: AppBar(
-              title: Text("Login Screen"),
+              title: Text("Register Screen"),
               actions: <Widget>[
                 FlatButton.icon(
                     onPressed: () {
                       widget.toggleView();
                     },
                     icon: Icon(Icons.person),
-                    label: Text("Register"))
+                    label: Text("Log In"))
               ],
             ),
             body: Form(
@@ -100,11 +97,11 @@ class _LoginInScreenState extends State<LoginInScreen> {
                           if (_formKey.currentState.validate()) {
                             setState(() => loading = true);
                             dynamic result = await _authService
-                                .signInWithEmailandPassword(email, password);
+                                .registerWithEmailandPassword(email, password);
                             if (result == null) {
                               setState(() {
                                 error =
-                                    'Could not sign in with those credintials';
+                                    'Please enter a valid email and password';
                                 loading = false;
                               });
                             }
@@ -112,7 +109,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                         },
                         color: Colors.black,
                         child: Text(
-                          "Login",
+                          "Register",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),
