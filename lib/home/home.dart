@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:screens_ui/home/settings_form.dart';
 import 'package:screens_ui/models/brew.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'package:screens_ui/services/database.dart';
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
           builder: (context) {
             return Container(
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-              child: Text('bottom sheet'),
+              child: SettingsForm(),
             );
           });
     }
