@@ -24,7 +24,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.lightGreen[200],
+            backgroundColor: Colors.green[300],
             appBar: AppBar(
               title: Text("Login Screen"),
               backgroundColor: Colors.green[800],

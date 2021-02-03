@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'package:screens_ui/services/databases_players.dart';
 import 'package:provider/provider.dart';
@@ -15,12 +15,13 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot>.value(
+    return StreamProvider<List<Player>>.value(
       value: DatabaseService().players,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green[300],
         appBar: AppBar(
-          backgroundColor: Colors.brown[400],
+          title: Text('Retro FC Players'),
+          backgroundColor: Colors.green[800],
           elevation: 0.0,
           actions: <Widget>[
             FlatButton.icon(

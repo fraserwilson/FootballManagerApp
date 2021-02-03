@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:screens_ui/models/players.dart';
 
 class DatabaseService {
   //collection reference for managers
@@ -24,8 +25,22 @@ class DatabaseService {
     });
   }
 
+  //player list from snapshot
+  List<Player> _playerListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Player(
+        name: doc.data()['name'] ?? '',
+        postion: doc.data()['postion'] ?? '',
+        attack: doc.data()['attack'] ?? '',
+        midfield: doc.data()['midfield'] ?? '',
+        defense: doc.data()['defense'] ?? '',
+        goalkeeping: doc.data()['goalkeeping'] ?? '',
+      );
+    }).toList();
+  }
+
   //get players stream
-  Stream<QuerySnapshot> get players {
-    return playerCollection.snapshots();
+  Stream<List<Player>> get players {
+    return playerCollection.snapshots().map(_playerListFromSnapshot);
   }
 }

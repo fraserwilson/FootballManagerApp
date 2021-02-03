@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:screens_ui/models/players.dart';
+import 'package:screens_ui/home/player_tile.dart';
 
 class PlayerList extends StatefulWidget {
   @override
@@ -10,12 +11,13 @@ class PlayerList extends StatefulWidget {
 class _PlayerListState extends State<PlayerList> {
   @override
   Widget build(BuildContext context) {
-    final players = Provider.of<QuerySnapshot>(context);
-    //print(players.docs);
-    for (var doc in players.docs) {
-      print(doc.data);
-    }
+    final players = Provider.of<List<Player>>(context);
 
-    return Container();
+    return ListView.builder(
+      itemCount: players.length,
+      itemBuilder: (context, index) {
+        return PlayerTile(player: players[index]);
+      },
+    );
   }
 }

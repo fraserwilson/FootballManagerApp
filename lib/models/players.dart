@@ -1,14 +1,14 @@
-class Players {
+class Player {
   final String name;
-  final String position;
+  final String postion;
   final int attack;
   final int midfield;
   final int defense;
   final int goalkeeping;
 
-  Players(
+  Player(
       {this.name,
-      this.position,
+      this.postion,
       this.attack,
       this.midfield,
       this.defense,
