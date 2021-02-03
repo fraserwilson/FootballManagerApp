@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:screens_ui/models/user.dart';
-import 'package:screens_ui/services/database.dart';
+import 'package:screens_ui/services/databases_players.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -48,10 +48,9 @@ class AuthService {
           email: email, password: password);
       User user = result.user;
 
-      //create new document for user with uid
+      //create a new document for the manager with their uid
       await DatabaseService(uid: user.uid)
-          .updateUserData('0', 'new crew member', 100);
-      return _userFromFirebaseUser(user);
+          .updatePlayer('Fraser', 'ST ', 0, 0, 0, 0);
     } catch (e) {
       print(e.toString());
       return null;
