@@ -9,13 +9,18 @@ class DatabaseService {
   final CollectionReference playerCollection =
       FirebaseFirestore.instance.collection('Managers');
 
+  final CollectionReference managerCollection =
+      FirebaseFirestore.instance.collection('Managers');
+
+  Future updateManager(String email, String password) async {
+    return await managerCollection
+        .doc(uid)
+        .set({'email': email, 'password': password});
+  }
+
   Future updatePlayer(String name, String postion, int attack, int midfield,
       int defense, int goalkeeping) async {
-    return await playerCollection
-        .doc(uid)
-        .collection('Players')
-        .doc('Player Details')
-        .set({
+    return await playerCollection.doc(uid).collection('Players').doc(uid).set({
       'name': name,
       'postion': postion,
       'attack': attack,

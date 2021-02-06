@@ -50,6 +50,8 @@ class AuthService {
 
       //create a new document for the manager with their uid
       await DatabaseService(uid: user.uid)
+          .updateManager('Mario@thenetninja.co.uk', 'Mario');
+      await DatabaseService(uid: user.uid)
           .updatePlayer('Fraser', 'ST ', 0, 0, 0, 0);
     } catch (e) {
       print(e.toString());

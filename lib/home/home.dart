@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/services/auth.dart';
@@ -12,28 +13,119 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final AuthService _auth = AuthService();
+  final db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<List<Player>>.value(
-      value: DatabaseService().players,
-      child: Scaffold(
-        backgroundColor: Colors.green[300],
-        appBar: AppBar(
-          title: Text('Retro FC Players'),
-          backgroundColor: Colors.green[800],
-          elevation: 0.0,
-          actions: <Widget>[
-            FlatButton.icon(
-              icon: Icon(Icons.person),
-              label: Text('Logout'),
-              onPressed: () async {
-                await _auth.signOut();
-              },
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: Colors.green[300],
+      appBar: AppBar(
+        title: Text('Retro FC Players'),
+        backgroundColor: Colors.green[800],
+        elevation: 0.0,
+        actions: <Widget>[
+          FlatButton.icon(
+            icon: Icon(Icons.person),
+            label: Text('Logout'),
+            onPressed: () async {
+              await _auth.signOut();
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: db.collection("Managers").snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var doc = snapshot.data.docs;
+              return ListView.builder(
+                  itemCount: doc.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PlayersList(doc[index].id)),
+                          );
+                        },
+                        child: Card(
+                          child: Column(
+                            children: <Widget>[
+                              Text(doc[index].data()['email']),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+            } else {
+              return LinearProgressIndicator();
+            }
+          },
         ),
-        body: PlayerList(),
+      ),
+    );
+  }
+}
+
+class PlayersList extends StatefulWidget {
+  final doc;
+  PlayersList(this.doc);
+  @override
+  _PlayersListState createState() => _PlayersListState();
+}
+
+class _PlayersListState extends State<PlayersList> {
+  final db = FirebaseFirestore.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Player"),
+        centerTitle: true,
+      ),
+      body: new StreamBuilder<QuerySnapshot>(
+        stream: db
+            .collection('Managers')
+            .doc(widget.doc)
+            .collection('Players')
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var doc = snapshot.data.docs;
+            return new ListView.builder(
+                itemCount: doc.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      child: Column(
+                        children: <Widget>[
+                          Text(doc[index].data()['name'] ?? 'Player name'),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(doc[index].data()['postion'] ??
+                              'Player position'),
+                        ],
+                      ),
+                    ),
+                  );
+                });
+          } else {
+            return LinearProgressIndicator();
+          }
+        },
       ),
     );
   }
