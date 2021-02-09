@@ -89,12 +89,31 @@ class _PlayersListState extends State<PlayersList> {
 
   @override
   Widget build(BuildContext context) {
+    void _showEditPlayerPanel() {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+            child: Text('Bottom Sheet'),
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Player"),
         centerTitle: true,
+        actions: <Widget>[
+          FlatButton.icon(
+            icon: Icon(Icons.settings),
+            label: Text('Edit Player'),
+            onPressed: () => _showEditPlayerPanel(),
+          )
+        ],
       ),
-      body: new StreamBuilder<QuerySnapshot>(
+      body: StreamBuilder<QuerySnapshot>(
         stream: db
             .collection('Managers')
             .doc(widget.doc)
@@ -109,15 +128,16 @@ class _PlayersListState extends State<PlayersList> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
-                      child: Column(
-                        children: <Widget>[
-                          Text(doc[index].data()['name'] ?? 'Player name'),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Text(doc[index].data()['postion'] ??
-                              'Player position'),
-                        ],
+                      margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          radius: 25.0,
+                          backgroundImage: AssetImage('assets/soccerball.jpg'),
+                        ),
+                        title: Text(doc[index].data()['name'] ?? 'Player name'),
+                        subtitle: Text('Player position: ' +
+                                doc[index].data()['postion'] ??
+                            'Player position'),
                       ),
                     ),
                   );
