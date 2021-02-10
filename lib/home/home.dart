@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:screens_ui/home/edit_player_sheet.dart';
 import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'package:screens_ui/services/databases_players.dart';
@@ -93,9 +94,11 @@ class _PlayersListState extends State<PlayersList> {
       showModalBottomSheet(
         context: context,
         builder: (context) {
-          return Container(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-            child: Text('Bottom Sheet'),
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+              child: EditPlayerSheet(),
+            ),
           );
         },
       );
@@ -105,13 +108,6 @@ class _PlayersListState extends State<PlayersList> {
       appBar: AppBar(
         title: Text("Player"),
         centerTitle: true,
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.settings),
-            label: Text('Edit Player'),
-            onPressed: () => _showEditPlayerPanel(),
-          )
-        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: db
@@ -138,6 +134,13 @@ class _PlayersListState extends State<PlayersList> {
                         subtitle: Text('Player position: ' +
                                 doc[index].data()['postion'] ??
                             'Player position'),
+                        trailing: Column(
+                          children: <Widget>[
+                            IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: () => _showEditPlayerPanel())
+                          ],
+                        ),
                       ),
                     ),
                   );
