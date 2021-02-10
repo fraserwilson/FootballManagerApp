@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -124,14 +125,7 @@ class _EditPlayerSheetState extends State<EditPlayerSheet> {
                       'Update',
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () async {
-                      print(_currentName);
-                      print(_currentPosition);
-                      print(_currentAttack);
-                      print(_currentMidfield);
-                      print(_currentDefense);
-                      print(_currentGoalkeeping);
-                    },
+                    onPressed: () {},
                   )
                 ],
               ),
