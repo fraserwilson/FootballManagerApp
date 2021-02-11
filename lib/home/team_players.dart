@@ -34,7 +34,7 @@ class _TeamPlayersState extends State<TeamPlayers> {
       body: Form(
         key: _formKey,
         child: Column(
-          children: <Widget>[],
+          children: <Widget>[Text('Players to be presented here')],
         ),
       ),
     );
