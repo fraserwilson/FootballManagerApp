@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
           context: context,
           builder: (context) {
             return Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 60.0),
               child: SettingsForm(),
             );
           });

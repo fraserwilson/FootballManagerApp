@@ -12,11 +12,17 @@ class _TeamPlayersState extends State<TeamPlayers> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Squad Players'),
+        actions: [
+          FlatButton.icon(
+              onPressed: () {},
+              icon: Icon(Icons.add),
+              label: Text('Add Players'))
+        ],
       ),
       body: Form(
         key: _formKey,
         child: Column(
-          children: <Widget>[Text('Players will be listed here')],
+          children: <Widget>[],
         ),
       ),
     );
