@@ -1,24 +1,13 @@
 class ConvertedUser {
   final String uid;
-  final String playeruid;
-  ConvertedUser({this.uid, this.playeruid});
+
+  ConvertedUser({this.uid});
 }
 
 class UserData {
-  final String playeruid;
-  final String name;
-  final String postion;
-  final int attack;
-  final int midfield;
-  final int defense;
-  final int goalkeeping;
+  final String uid;
+  final String teamName;
+  final String managerName;
 
-  UserData(
-      {this.playeruid,
-      this.name,
-      this.postion,
-      this.attack,
-      this.midfield,
-      this.defense,
-      this.goalkeeping});
+  UserData({this.uid, this.teamName, this.managerName});
 }
