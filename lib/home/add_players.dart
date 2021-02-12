@@ -57,10 +57,10 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                 ),
                 Text("Attack Stat", style: TextStyle(fontSize: 12.0)),
                 Slider(
-                  value: (_attackStat ?? 100).toDouble(),
-                  min: 100.0,
-                  max: 900.0,
-                  divisions: 8,
+                  value: (_attackStat ?? 1).toDouble(),
+                  min: 1,
+                  max: 10,
+                  divisions: 9,
                   onChanged: (val) => setState(() => _attackStat = val.round()),
                 ),
                 SizedBox(
@@ -68,10 +68,10 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                 ),
                 Text("Midfield Stat", style: TextStyle(fontSize: 12.0)),
                 Slider(
-                  value: (_midfieldStat ?? 100).toDouble(),
-                  min: 100.0,
-                  max: 900.0,
-                  divisions: 8,
+                  value: (_midfieldStat ?? 1).toDouble(),
+                  min: 1,
+                  max: 10,
+                  divisions: 9,
                   onChanged: (val) =>
                       setState(() => _midfieldStat = val.round()),
                 ),
@@ -80,10 +80,10 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                 ),
                 Text("Defense Stat", style: TextStyle(fontSize: 12.0)),
                 Slider(
-                  value: (_defenseStat ?? 100).toDouble(),
-                  min: 100.0,
-                  max: 900.0,
-                  divisions: 8,
+                  value: (_defenseStat ?? 1).toDouble(),
+                  min: 1,
+                  max: 10,
+                  divisions: 9,
                   onChanged: (val) =>
                       setState(() => _defenseStat = val.round()),
                 ),
@@ -92,10 +92,10 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                 ),
                 Text("Goalkeeping Stat", style: TextStyle(fontSize: 12.0)),
                 Slider(
-                  value: (_goalkeppingStat ?? 100).toDouble(),
-                  min: 100.0,
-                  max: 900.0,
-                  divisions: 8,
+                  value: (_goalkeppingStat ?? 1).toDouble(),
+                  min: 1,
+                  max: 10,
+                  divisions: 9,
                   onChanged: (val) =>
                       setState(() => _goalkeppingStat = val.round()),
                 ),
