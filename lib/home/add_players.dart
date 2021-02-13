@@ -12,7 +12,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
 
   //form values
   String _playerName;
-  String _playerSurname;
+  String _playerPosition;
   int _attackStat;
   int _midfieldStat;
   int _defenseStat;
@@ -49,8 +49,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                     borderRadius: BorderRadius.circular(25),
                   )),
                   validator: (val) =>
-                      val.isEmpty ? 'Please enter a surname' : null,
-                  onChanged: (val) => setState(() => _playerSurname = val),
+                      val.isEmpty ? 'Please enter a position' : null,
+                  onChanged: (val) => setState(() => _playerPosition = val),
                 ),
                 SizedBox(
                   height: 10.0,
@@ -118,8 +118,24 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
+                      final databaseReference = FirebaseFirestore.instance;
+                      void createPlayer() async {
+                        DocumentReference ref =
+                            await databaseReference.collection("Players").add({
+                          'name': _playerName,
+                          'position': _playerPosition,
+                          'attack': _attackStat,
+                          'midfield': _midfieldStat,
+                          'defense': _defenseStat,
+                          'goalkeeping': _goalkeppingStat,
+                          'isAvaliable': _isAvaliable,
+                        });
+                        print(ref.id);
+                      }
+
+                      createPlayer();
                       print(_playerName);
-                      print(_playerSurname);
+                      print(_playerPosition);
                       print(_attackStat);
                       print(_midfieldStat);
                       print(_defenseStat);
