@@ -61,15 +61,27 @@ class _PlayerListState extends State<PlayerList> {
                         ),
                         subtitle: Text(snapshot.data[index].data()['position']),
                         onTap: () => navigateToDetails(snapshot.data[index]),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () {
-                            print(snapshot.data[index].id);
-                            FirebaseFirestore.instance
-                                .collection('Players')
-                                .doc(snapshot.data[index].id)
-                                .delete();
-                          },
+                        trailing: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.delete),
+                                onPressed: () {
+                                  print(snapshot.data[index].id);
+                                  FirebaseFirestore.instance
+                                      .collection('Players')
+                                      .doc(snapshot.data[index].id)
+                                      .delete();
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.colorize_sharp),
+                                onPressed: () {
+                                  print(snapshot.data[index].id);
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     });
