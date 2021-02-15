@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:screens_ui/home/player_details.dart';
@@ -15,8 +16,12 @@ class PlayerList extends StatefulWidget {
 class _PlayerListState extends State<PlayerList> {
   Future _data;
   Future getPlayers() async {
+    var firebaseUser = FirebaseAuth.instance.currentUser;
     var firestore = FirebaseFirestore.instance;
-    QuerySnapshot qn = await firestore.collection('Players').get();
+    QuerySnapshot qn = await firestore
+        .collection('Players')
+        .where('uid', isEqualTo: firebaseUser.uid)
+        .get();
     return qn.docs;
   }
 

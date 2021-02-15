@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:screens_ui/shared/constants.dart';
+import 'package:screens_ui/models/user.dart';
 
 class AddPlayersFo extends StatefulWidget {
   @override
@@ -20,6 +22,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
   bool _isAvaliable = false;
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<ConvertedUser>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -122,6 +125,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                       void createPlayer() async {
                         DocumentReference ref =
                             await databaseReference.collection("Players").add({
+                          'uid': user.uid,
                           'name': _playerName,
                           'position': _playerPosition,
                           'attack': _attackStat,
