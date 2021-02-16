@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:screens_ui/home/add_players.dart';
+import 'package:screens_ui/home/edit_settings_form.dart';
 import 'package:screens_ui/home/player_list.dart';
 import 'package:screens_ui/models/players.dart';
 

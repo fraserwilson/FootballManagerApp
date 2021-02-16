@@ -138,13 +138,6 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                       }
 
                       createPlayer();
-                      print(_playerName);
-                      print(_playerPosition);
-                      print(_attackStat);
-                      print(_midfieldStat);
-                      print(_defenseStat);
-                      print(_goalkeppingStat);
-                      print(_isAvaliable);
                     })
               ],
             ),

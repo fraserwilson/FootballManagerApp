@@ -8,8 +8,8 @@ class PlayerDatabaseService {
   final CollectionReference playerCollection =
       FirebaseFirestore.instance.collection('Players');
 
-  Future updateUserData(String uid, String name, String position, int attack,
-      int midifled, int defense, int goalkeeping, bool isAvaliable) async {
+  Future updateUserData(String name, String position, int attack, int midifled,
+      int defense, int goalkeeping, bool isAvaliable) async {
     return await playerCollection.doc(uid).set({
       'uid': uid,
       'name': name,
@@ -38,8 +38,27 @@ class PlayerDatabaseService {
     }).toList();
   }
 
+  //playerData from a snapshot
+  PlayerData _playerDataFromSnapshot(DocumentSnapshot snapshot) {
+    return PlayerData(
+      uid: uid,
+      name: snapshot.data()['name'],
+      position: snapshot.data()['position'],
+      attack: snapshot.data()['attack'],
+      midfield: snapshot.data()['midfield'],
+      defense: snapshot.data()['defense'],
+      goalkeeping: snapshot.data()['goalkeeping'],
+      isAvaliable: snapshot.data()['isAvaliable'],
+    );
+  }
+
   //stream of players
   Stream<List<PlayersModel>> get players {
     return playerCollection.snapshots().map(_playerListFromSnapshot);
+  }
+
+  //get the player document stream
+  Stream<PlayerData> get playerData {
+    return playerCollection.doc(uid).snapshots().map(_playerDataFromSnapshot);
   }
 }

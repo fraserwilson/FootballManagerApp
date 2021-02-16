@@ -32,3 +32,24 @@ class PlayersModel {
         isAvaliable: data['isAvaliable']);
   }
 }
+
+class PlayerData {
+  final String uid;
+  final String name;
+  final String position;
+  final int attack;
+  final int midfield;
+  final int defense;
+  final int goalkeeping;
+  final bool isAvaliable;
+
+  PlayerData(
+      {this.uid,
+      this.name,
+      this.position,
+      this.attack,
+      this.midfield,
+      this.defense,
+      this.goalkeeping,
+      this.isAvaliable});
+}

@@ -53,7 +53,7 @@ class AuthService {
       await DatabaseService(uid: user.uid)
           .updateUserData('Retro FC', 'new manager');
       await PlayerDatabaseService(uid: user.uid)
-          .updateUserData(user.uid, 'John', 'GK', 1, 1, 1, 1, true);
+          .updateUserData('John', 'GK', 1, 1, 1, 1, true);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
