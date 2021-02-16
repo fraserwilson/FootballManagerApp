@@ -1,0 +1,50 @@
+Container(
+          child: FutureBuilder(
+              future: _data,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: Text("Loading"),
+                  );
+                } else {
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Image.asset('assets/player.png'),
+                          title: Text(
+                            snapshot.data[index].data()['name'],
+                          ),
+                          subtitle:
+                              Text(snapshot.data[index].data()['position']),
+                          onTap: () => navigateToDetails(snapshot.data[index]),
+                          trailing: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    print(snapshot.data[index].id);
+                                    FirebaseFirestore.instance
+                                        .collection('Players')
+                                        .doc(snapshot.data[index].id)
+                                        .delete();
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.colorize_sharp),
+                                  onPressed: () {
+                                    print(snapshot.data[index].id);
+                                    FirebaseFirestore.instance
+                                        .collection('Players')
+                                        .doc(snapshot.data[index].id);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                }
+              }),
+        ),

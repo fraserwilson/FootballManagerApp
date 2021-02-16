@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PlayersModel {
+  final String uid;
   final String name;
   final String position;
   final int attack;
@@ -10,7 +11,8 @@ class PlayersModel {
   final bool isAvaliable;
 
   PlayersModel(
-      {this.name,
+      {this.uid,
+      this.name,
       this.position,
       this.attack,
       this.midfield,

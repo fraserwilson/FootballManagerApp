@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:screens_ui/home/player_brew_list.dart';
 import 'package:screens_ui/home/player_details.dart';
 import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/shared/loading.dart';
+import 'package:screens_ui/services/database_players.dart';
 
 class PlayerList extends StatefulWidget {
   final PlayersModel playersModel;
@@ -41,55 +43,10 @@ class _PlayerListState extends State<PlayerList> {
   }
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: FutureBuilder(
-            future: _data,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: Text("Loading"),
-                );
-              } else {
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Image.asset('assets/player.png'),
-                        title: Text(
-                          snapshot.data[index].data()['name'],
-                        ),
-                        subtitle: Text(snapshot.data[index].data()['position']),
-                        onTap: () => navigateToDetails(snapshot.data[index]),
-                        trailing: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.delete),
-                                onPressed: () {
-                                  print(snapshot.data[index].id);
-                                  FirebaseFirestore.instance
-                                      .collection('Players')
-                                      .doc(snapshot.data[index].id)
-                                      .delete();
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.colorize_sharp),
-                                onPressed: () {
-                                  print(snapshot.data[index].id);
-                                  FirebaseFirestore.instance
-                                      .collection('Players')
-                                      .doc(snapshot.data[index].id);
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    });
-              }
-            }),
+    return StreamProvider<List<PlayersModel>>.value(
+      value: PlayerDatabaseService().players,
+      child: Scaffold(
+        body: PlayerBrewList(),
       ),
     );
   }
