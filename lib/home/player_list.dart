@@ -78,6 +78,9 @@ class _PlayerListState extends State<PlayerList> {
                                 icon: Icon(Icons.colorize_sharp),
                                 onPressed: () {
                                   print(snapshot.data[index].id);
+                                  FirebaseFirestore.instance
+                                      .collection('Players')
+                                      .doc(snapshot.data[index].id);
                                 },
                               ),
                             ],
