@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:screens_ui/models/user.dart';
+import 'package:screens_ui/services/database_players.dart';
 import 'package:screens_ui/services/databases_teams.dart';
 
 class AuthService {
@@ -51,6 +52,8 @@ class AuthService {
       //create a new document
       await DatabaseService(uid: user.uid)
           .updateUserData('Retro FC', 'new manager');
+      await PlayerDatabaseService(uid: user.uid)
+          .updateUserData('John', 'GK', 1, 1, 1, 1, true);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
