@@ -57,7 +57,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     height: 20.0,
                   ),
                   RaisedButton(
-                    color: Colors.pink[400],
+                    color: Colors.blue,
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         await DatabaseService(uid: user.uid).updateUserData(

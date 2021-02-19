@@ -24,10 +24,8 @@ class _LoginInScreenState extends State<LoginInScreen> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.green[300],
             appBar: AppBar(
               title: Text("Login Screen"),
-              backgroundColor: Colors.green[800],
               actions: <Widget>[
                 FlatButton.icon(
                     onPressed: () {
@@ -50,7 +48,6 @@ class _LoginInScreenState extends State<LoginInScreen> {
                       Center(
                         child: CircleAvatar(
                           backgroundImage: AssetImage('assets/soccerball.jpg'),
-                          backgroundColor: Colors.lightGreen[200],
                           radius: 60.0,
                         ),
                       ),
@@ -115,7 +112,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                               }
                             }
                           },
-                          color: Colors.green[800],
+                          color: Colors.blue,
                           child: Text(
                             "Login",
                             textAlign: TextAlign.center,
