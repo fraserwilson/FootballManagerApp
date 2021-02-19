@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:screens_ui/home/player_brew_list.dart';
 import 'package:screens_ui/home/player_details.dart';
 import 'package:screens_ui/models/players.dart';
-import 'package:screens_ui/shared/loading.dart';
 import 'package:screens_ui/services/database_players.dart';
 
 class PlayerList extends StatefulWidget {
@@ -16,7 +15,6 @@ class PlayerList extends StatefulWidget {
 }
 
 class _PlayerListState extends State<PlayerList> {
-  Future _data;
   Future getPlayers() async {
     var firebaseUser = FirebaseAuth.instance.currentUser;
     var firestore = FirebaseFirestore.instance;
@@ -37,11 +35,6 @@ class _PlayerListState extends State<PlayerList> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _data = getPlayers();
-  }
-
   Widget build(BuildContext context) {
     return StreamProvider<List<PlayersModel>>.value(
       value: PlayerDatabaseService().players,

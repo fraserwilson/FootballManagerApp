@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:screens_ui/shared/constants.dart';
 import 'package:screens_ui/models/user.dart';
 
 class AddPlayersFo extends StatefulWidget {
@@ -138,6 +137,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                       }
 
                       createPlayer();
+                      Navigator.pop(context);
                     })
               ],
             ),

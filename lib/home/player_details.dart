@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:screens_ui/models/players.dart';
 
 class DetailPage extends StatefulWidget {
   final DocumentSnapshot playerDetail;
