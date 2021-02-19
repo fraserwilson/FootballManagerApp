@@ -44,6 +44,7 @@ class _RegisterState extends State<Register> {
                       ),
                       Center(
                         child: CircleAvatar(
+                          backgroundColor: Colors.white,
                           backgroundImage: AssetImage('assets/soccerball.jpg'),
                           radius: 60.0,
                         ),

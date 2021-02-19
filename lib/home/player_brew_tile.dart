@@ -30,7 +30,10 @@ class PlayerBrewTile extends StatelessWidget {
           title: Text(player.name),
           subtitle: Text('Position: ${player.position}'),
           trailing: FlatButton.icon(
-              onPressed: () => _showEditPlayer(),
+              onPressed: () {
+                _showEditPlayer();
+                print(player.uid);
+              },
               icon: Icon(Icons.settings),
               label: Text('Edit Players')),
         ),

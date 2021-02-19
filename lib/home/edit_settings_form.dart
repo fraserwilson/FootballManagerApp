@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/models/user.dart';
 import 'package:screens_ui/services/database_players.dart';
-import 'package:screens_ui/shared/constants.dart';
 import 'package:screens_ui/shared/loading.dart';
 
 class EditPlayersForSheet extends StatefulWidget {

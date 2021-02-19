@@ -47,6 +47,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                       ),
                       Center(
                         child: CircleAvatar(
+                          backgroundColor: Colors.white,
                           backgroundImage: AssetImage('assets/soccerball.jpg'),
                           radius: 60.0,
                         ),
