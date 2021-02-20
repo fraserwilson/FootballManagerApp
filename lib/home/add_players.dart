@@ -122,8 +122,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                     onPressed: () {
                       final databaseReference = FirebaseFirestore.instance;
                       void createPlayer() async {
-                        DocumentReference ref =
-                            await databaseReference.collection("Players").add({
+                        var ref = databaseReference.collection('Players').doc();
+                        await ref.set({
                           'uid': user.uid,
                           'name': _playerName,
                           'position': _playerPosition,
@@ -132,6 +132,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                           'defense': _defenseStat,
                           'goalkeeping': _goalkeppingStat,
                           'isAvaliable': _isAvaliable,
+                          'docId': ref.id
                         });
                         print(ref.id);
                       }

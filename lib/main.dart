@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:screens_ui/home/edit_settings_form.dart';
+import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/models/user.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'wrapper.dart';
@@ -19,7 +21,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<ConvertedUser>.value(
-        value: AuthService().streamuser, child: MaterialApp(home: Wrapper()));
+    return MultiProvider(providers: [
+      StreamProvider<ConvertedUser>.value(
+        value: AuthService().streamuser,
+      ),
+    ], child: MaterialApp(home: Wrapper()));
   }
 }

@@ -9,6 +9,7 @@ class PlayersModel {
   final int defense;
   final int goalkeeping;
   final bool isAvaliable;
+  final String docId;
 
   PlayersModel(
       {this.uid,
@@ -18,7 +19,8 @@ class PlayersModel {
       this.midfield,
       this.defense,
       this.goalkeeping,
-      this.isAvaliable});
+      this.isAvaliable,
+      this.docId});
 
   factory PlayersModel.fromFireStore(DocumentSnapshot doc) {
     Map data = doc.data();
@@ -42,6 +44,7 @@ class PlayerData {
   final int defense;
   final int goalkeeping;
   final bool isAvaliable;
+  final String docId;
 
   PlayerData(
       {this.uid,
@@ -51,5 +54,6 @@ class PlayerData {
       this.midfield,
       this.defense,
       this.goalkeeping,
-      this.isAvaliable});
+      this.isAvaliable,
+      this.docId});
 }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/models/user.dart';
 import 'package:screens_ui/services/database_players.dart';
 import 'package:screens_ui/services/databases_teams.dart';
@@ -7,7 +8,6 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create a user object based on a Firebase User
-
   ConvertedUser _userFromFirebaseUser(User user) {
     return user != null ? ConvertedUser(uid: user.uid) : null;
   }
@@ -52,8 +52,6 @@ class AuthService {
       //create a new document
       await DatabaseService(uid: user.uid)
           .updateUserData('Retro FC', 'new manager');
-      await PlayerDatabaseService(uid: user.uid)
-          .updateUserData('John', 'GK', 1, 1, 1, 1, true);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
