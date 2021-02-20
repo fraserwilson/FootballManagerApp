@@ -74,7 +74,9 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                         ),
                                                         TextFormField(
                                                           initialValue: snapshot
-                                                              .data.name,
+                                                                  .data
+                                                                  .docs[index]
+                                                              ['name'],
                                                           decoration:
                                                               InputDecoration(
                                                                   border:
@@ -98,7 +100,9 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                         ),
                                                         TextFormField(
                                                           initialValue: snapshot
-                                                              .data.position,
+                                                                  .data
+                                                                  .docs[index]
+                                                              ['position'],
                                                           decoration:
                                                               InputDecoration(
                                                                   border:
@@ -127,7 +131,10 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                         Slider(
                                                           value: (_attackStat ??
                                                                   snapshot.data
-                                                                      .attack)
+                                                                              .docs[
+                                                                          index]
+                                                                      [
+                                                                      'attack'])
                                                               .toDouble(),
                                                           min: 1,
                                                           max: 10,
@@ -147,7 +154,10 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                         Slider(
                                                           value: (_midfieldStat ??
                                                                   snapshot.data
-                                                                      .midfield)
+                                                                              .docs[
+                                                                          index]
+                                                                      [
+                                                                      'midfield'])
                                                               .toDouble(),
                                                           min: 1,
                                                           max: 10,
@@ -167,7 +177,10 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                         Slider(
                                                           value: (_defenseStat ??
                                                                   snapshot.data
-                                                                      .defense)
+                                                                              .docs[
+                                                                          index]
+                                                                      [
+                                                                      'defense'])
                                                               .toDouble(),
                                                           min: 1,
                                                           max: 10,
@@ -187,7 +200,10 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                         Slider(
                                                           value: (_goalkeppingStat ??
                                                                   snapshot.data
-                                                                      .goalkeeping)
+                                                                              .docs[
+                                                                          index]
+                                                                      [
+                                                                      'goalkepping'])
                                                               .toDouble(),
                                                           min: 1,
                                                           max: 10,
@@ -206,7 +222,9 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                             tristate: false,
                                                             value: _isAvaliable ??
                                                                 snapshot.data
-                                                                    .isAvaliable,
+                                                                            .docs[
+                                                                        index][
+                                                                    'isAvaliable'],
                                                             onChanged:
                                                                 (bool value) {
                                                               setState(() {
