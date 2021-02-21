@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:screens_ui/home/edit_settings_form.dart';
-import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/models/user.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'wrapper.dart';

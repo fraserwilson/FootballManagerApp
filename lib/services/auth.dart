@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/models/user.dart';
-import 'package:screens_ui/services/database_players.dart';
 import 'package:screens_ui/services/databases_teams.dart';
 
 class AuthService {

@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:screens_ui/home/player_brew_tile.dart';
 import 'package:screens_ui/models/players.dart';
-import 'package:screens_ui/models/user.dart';
-import 'package:screens_ui/services/database_players.dart';
-import 'package:screens_ui/shared/loading.dart';
 
 class PlayerBrewList extends StatefulWidget {
   final PlayersModel player;
@@ -23,6 +19,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
   int _defenseStat = 1;
   int _goalkeppingStat = 1;
   bool _isAvaliable = false;
+  @override
   Widget build(BuildContext context) {
     final players = Provider.of<List<PlayersModel>>(context) ?? [];
     return FutureBuilder(
@@ -129,21 +126,17 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                                 fontSize:
                                                                     12.0)),
                                                         Slider(
-                                                          value: (_attackStat ??
-                                                                  snapshot.data
-                                                                              .docs[
-                                                                          index]
-                                                                      [
-                                                                      'attack'])
-                                                              .toDouble(),
-                                                          min: 1,
-                                                          max: 10,
-                                                          divisions: 9,
-                                                          onChanged: (val) =>
-                                                              setState(() =>
-                                                                  _attackStat =
-                                                                      val.round()),
-                                                        ),
+                                                            value: _attackStat
+                                                                .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _attackStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
                                                         SizedBox(
                                                           height: 10.0,
                                                         ),
@@ -152,21 +145,17 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                                 fontSize:
                                                                     12.0)),
                                                         Slider(
-                                                          value: (_midfieldStat ??
-                                                                  snapshot.data
-                                                                              .docs[
-                                                                          index]
-                                                                      [
-                                                                      'midfield'])
-                                                              .toDouble(),
-                                                          min: 1,
-                                                          max: 10,
-                                                          divisions: 9,
-                                                          onChanged: (val) =>
-                                                              setState(() =>
-                                                                  _midfieldStat =
-                                                                      val.round()),
-                                                        ),
+                                                            value: _midfieldStat
+                                                                .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _midfieldStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
                                                         SizedBox(
                                                           height: 10.0,
                                                         ),
@@ -175,21 +164,17 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                                 fontSize:
                                                                     12.0)),
                                                         Slider(
-                                                          value: (_defenseStat ??
-                                                                  snapshot.data
-                                                                              .docs[
-                                                                          index]
-                                                                      [
-                                                                      'defense'])
-                                                              .toDouble(),
-                                                          min: 1,
-                                                          max: 10,
-                                                          divisions: 9,
-                                                          onChanged: (val) =>
-                                                              setState(() =>
-                                                                  _defenseStat =
-                                                                      val.round()),
-                                                        ),
+                                                            value: _defenseStat
+                                                                .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _defenseStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
                                                         SizedBox(
                                                           height: 10.0,
                                                         ),
@@ -198,21 +183,18 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                                 fontSize:
                                                                     12.0)),
                                                         Slider(
-                                                          value: (_goalkeppingStat ??
-                                                                  snapshot.data
-                                                                              .docs[
-                                                                          index]
-                                                                      [
-                                                                      'goalkepping'])
-                                                              .toDouble(),
-                                                          min: 1,
-                                                          max: 10,
-                                                          divisions: 9,
-                                                          onChanged: (val) =>
-                                                              setState(() =>
-                                                                  _goalkeppingStat =
-                                                                      val.round()),
-                                                        ),
+                                                            value:
+                                                                _goalkeppingStat
+                                                                    .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _goalkeppingStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
                                                         SizedBox(
                                                           height: 10.0,
                                                         ),
@@ -220,11 +202,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                             'Is this player avaliable?'),
                                                         Checkbox(
                                                             tristate: false,
-                                                            value: _isAvaliable ??
-                                                                snapshot.data
-                                                                            .docs[
-                                                                        index][
-                                                                    'isAvaliable'],
+                                                            value: _isAvaliable,
                                                             onChanged:
                                                                 (bool value) {
                                                               setState(() {
