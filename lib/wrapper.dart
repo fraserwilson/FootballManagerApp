@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:screens_ui/home/home.dart';
 import 'package:screens_ui/models/user.dart';
+import 'package:screens_ui/schedule.dart';
 import 'authenticate/authenticate.dart';
 
 class Wrapper extends StatelessWidget {
@@ -14,7 +15,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
-      return Home();
+      return SchedulePage();
     }
   }
 }
