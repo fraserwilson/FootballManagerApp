@@ -25,6 +25,7 @@ class _TeamPlayersState extends State<TeamPlayers> {
         appBar: AppBar(
           actions: [
             FlatButton.icon(
+                textColor: Colors.white,
                 onPressed: () => _showAddPlayer(),
                 icon: Icon(Icons.add),
                 label: Text('Add Players')),
