@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:screens_ui/home/home.dart';
 import 'package:screens_ui/home/summary_page.dart';
-import 'package:screens_ui/home/player_details.dart';
 import 'package:screens_ui/models/players.dart';
 
 class PlayerBrewList extends StatefulWidget {
