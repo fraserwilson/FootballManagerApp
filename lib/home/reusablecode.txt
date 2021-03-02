@@ -315,3 +315,43 @@ final players = Provider.of<List<PlayersModel>>(context) ?? [];
   int _defenseStat = 1;
   int _goalkeppingStat = 1;
   bool _isAvaliable = false;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+writeOnPdf() {
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        margin: pw.EdgeInsets.all(32),
+        build: (pw.Context context) {
+          return <pw.Widget>[
+            pw.Header(level: 0, child: pw.Text('Squad List')),
+            pw.Paragraph(text: 'This will showcase my squad list'),
+            pw.Header(level: 1, child: pw.Text('Second Heading')),
+            pw.Paragraph(
+                text:
+                    'This is the second heading hich will showcase my squad formation and squad playstyle'),
+          ];
+        },
+      ),
+    );
+  }
+
+  Future savePdf() async {
+    Directory docmuentDirectory = await getApplicationDocumentsDirectory();
+
+    String path = docmuentDirectory.path;
+
+    File file = File("$path/example.pdf");
+    file.writeAsBytesSync(pdf.save());
+  }
+
+  writeOnPdf();
+                await savePdf();
+                Directory docmuentDirectory =
+                    await getApplicationDocumentsDirectory();
+
+                String path = docmuentDirectory.path;
+                String fullPath = "$path/example.pdf";
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PDFPreview(path: fullPath)));

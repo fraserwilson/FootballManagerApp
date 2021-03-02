@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:screens_ui/home/view_pdf.dart';
-import 'package:screens_ui/shared/loading.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
+import 'package:screens_ui/shared/loading.dart';
 
 class SummaryPage extends StatefulWidget {
   @override
@@ -18,35 +16,36 @@ class _SummaryPageState extends State<SummaryPage> {
   int _currentIndex = 0;
   bool isAvaliable = true;
   Query query;
-  final pdf = pw.Document();
+  static GlobalKey previewContainer = new GlobalKey();
+  //final pdf = pw.Document();
 
-  writeOnPdf() {
-    pdf.addPage(
-      pw.MultiPage(
-        pageFormat: PdfPageFormat.a4,
-        margin: pw.EdgeInsets.all(32),
-        build: (pw.Context context) {
-          return <pw.Widget>[
-            pw.Header(level: 0, child: pw.Text('Squad List')),
-            pw.Paragraph(text: 'This will showcase my squad list'),
-            pw.Header(level: 1, child: pw.Text('Second Heading')),
-            pw.Paragraph(
-                text:
-                    'This is the second heading hich will showcase my squad formation and squad playstyle'),
-          ];
-        },
-      ),
-    );
-  }
+  // writeOnPdf() {
+  //   pdf.addPage(
+  //     pw.MultiPage(
+  //       pageFormat: PdfPageFormat.a4,
+  //       margin: pw.EdgeInsets.all(32),
+  //       build: (pw.Context context) {
+  //         return <pw.Widget>[
+  //           pw.Header(level: 0, child: pw.Text('Squad List')),
+  //           pw.Paragraph(text: 'This will showcase my squad list'),
+  //           pw.Header(level: 1, child: pw.Text('Second Heading')),
+  //           pw.Paragraph(
+  //               text:
+  //                   'This is the second heading which will showcase my squad formation and squad playstyle'),
+  //         ];
+  //       },
+  //     ),
+  //   );
+  // }
 
-  Future savePdf() async {
-    Directory docmuentDirectory = await getApplicationDocumentsDirectory();
+  // Future savePdf() async {
+  //   Directory docmuentDirectory = await getApplicationDocumentsDirectory();
 
-    String path = docmuentDirectory.path;
+  //   String path = docmuentDirectory.path;
 
-    File file = File("$path/example.pdf");
-    file.writeAsBytesSync(pdf.save());
-  }
+  //   File file = File("$path/example.pdf");
+  //   file.writeAsBytesSync(pdf.save());
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -170,78 +169,96 @@ class _SummaryPageState extends State<SummaryPage> {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Summary Page'),
-        actions: [
-          FlatButton.icon(
-              onPressed: () async {
-                writeOnPdf();
-                await savePdf();
-                Directory docmuentDirectory =
-                    await getApplicationDocumentsDirectory();
+    return RepaintBoundary(
+      key: previewContainer,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Summary Page'),
+          actions: [
+            FlatButton.icon(
+                onPressed: () {
+                  takeScreenShot() async {
+                    RenderRepaintBoundary boundary =
+                        previewContainer.currentContext.findRenderObject();
+                    ui.Image image = await boundary.toImage();
+                    final directory =
+                        (await getApplicationDocumentsDirectory()).path;
+                    ByteData byteData =
+                        await image.toByteData(format: ui.ImageByteFormat.png);
+                    Uint8List pngBytes = byteData.buffer.asUint8List();
+                    print(pngBytes);
+                    File imgFile = new File('$directory/screenshot.png');
+                    imgFile.writeAsBytes(pngBytes);
+                  }
 
-                String path = docmuentDirectory.path;
-                String fullPath = "$path/example.pdf";
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PDFPreview(path: fullPath)));
-              },
-              icon: Icon(
-                Icons.mail,
-                color: Colors.white,
-              ),
-              label: Text(
-                'Save Squad',
-                style: TextStyle(
+                  takeScreenShot();
+                  // writeOnPdf();
+                  // await savePdf();
+                  // Directory docmuentDirectory =
+                  //     await getApplicationDocumentsDirectory();
+
+                  // String path = docmuentDirectory.path;
+                  // String fullPath = "$path/example.pdf";
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => PDFPreview(path: fullPath)));
+                },
+                icon: Icon(
+                  Icons.mail,
                   color: Colors.white,
                 ),
-              ))
-        ],
-      ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('Players')
-            .where('isAvaliable', isEqualTo: isAvaliable)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data.docs.length,
-              itemBuilder: (context, index) {
-                DocumentSnapshot docSnap = snapshot.data.docs[index];
-                return Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: Card(
-                        margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-                        child: ListTile(
-                            onTap: () {
-                              //ToDo
-                            },
-                            leading: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 25.0,
-                                backgroundImage:
-                                    AssetImage('assets/player.png')),
-                            title: Text(docSnap['name']),
-                            subtitle:
-                                Text('Position: ${docSnap['position']}'))));
-              },
-            );
-          } else {
-            return Loading();
-          }
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Playstyle'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.time_to_leave), label: 'Formation'),
-        ],
+                label: Text(
+                  'Save Squad',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ))
+          ],
+        ),
+        body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('Players')
+              .where('isAvaliable', isEqualTo: isAvaliable)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot docSnap = snapshot.data.docs[index];
+                  return Padding(
+                      padding: EdgeInsets.only(top: 8.0),
+                      child: Card(
+                          margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+                          child: ListTile(
+                              onTap: () {
+                                //ToDo
+                              },
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage('assets/player.png')),
+                              title: Text(docSnap['name']),
+                              subtitle:
+                                  Text('Position: ${docSnap['position']}'))));
+                },
+              );
+            } else {
+              return Loading();
+            }
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: onTabTapped,
+          currentIndex: _currentIndex,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Playstyle'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.time_to_leave), label: 'Formation'),
+          ],
+        ),
       ),
     );
   }
