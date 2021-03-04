@@ -21,6 +21,12 @@ class _SummaryPageState extends State<SummaryPage> {
   int _currentIndex = 0;
   bool isAvaliable = true;
   Query query;
+  bool counterAttack = false;
+  bool tikiTaka = false;
+  bool longBalls = false;
+  bool fourFourTwo = false;
+  bool fourThreeThree = false;
+  bool threeFiveTwo = false;
   static GlobalKey previewContainer = new GlobalKey();
   final pdf = pw.Document();
 
@@ -63,56 +69,78 @@ class _SummaryPageState extends State<SummaryPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              scrollable: true,
-              title: Text('Playstyles'),
-              content: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Form(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 25.0,
-                              backgroundImage:
-                                  AssetImage('assets/running.jpg')),
-                          title: Text('Counter-Attack'),
-                          subtitle: Text('Fast, reactive free-flowing play'),
-                        ),
+                scrollable: true,
+                title: Text('Playstyles'),
+                content: StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) {
+                  return Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Form(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: ListTile(
+                              tileColor:
+                                  counterAttack ? Colors.blue : Colors.white,
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage('assets/running.jpg')),
+                              title: Text('Counter-Attack'),
+                              subtitle:
+                                  Text('Fast, reactive free-flowing play'),
+                              onTap: () {
+                                setState(() {
+                                  counterAttack = !counterAttack;
+                                });
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: ListTile(
+                              tileColor: tikiTaka ? Colors.blue : Colors.white,
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage('assets/passing.png')),
+                              title: Text('Tiki-Taka'),
+                              subtitle: Text(
+                                  'Short passes, with the intent to break down opposition teams'),
+                              onTap: () {
+                                setState(() {
+                                  tikiTaka = !tikiTaka;
+                                });
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: ListTile(
+                              tileColor: longBalls ? Colors.blue : Colors.white,
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage('assets/crossing.png')),
+                              title: Text('Long balls'),
+                              subtitle: Text(
+                                  'Constant crosses into the box, generally after absorbing large amounts of pressure'),
+                              onTap: () {
+                                setState(() {
+                                  longBalls = !longBalls;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 25.0,
-                              backgroundImage:
-                                  AssetImage('assets/passing.png')),
-                          title: Text('Tiki-Taka'),
-                          subtitle: Text(
-                              'Short passes, with the intent to break down opposition teams'),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 25.0,
-                              backgroundImage:
-                                  AssetImage('assets/crossing.png')),
-                          title: Text('Long balls'),
-                          subtitle: Text(
-                              'Constant crosses into the box, generally after absorbing large amounts of pressure'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
+                    ),
+                  );
+                }));
           },
         );
       }
@@ -123,50 +151,78 @@ class _SummaryPageState extends State<SummaryPage> {
             return AlertDialog(
               scrollable: true,
               title: Text('Team Formations'),
-              content: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Form(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 25.0,
-                              backgroundImage: AssetImage('assets/442.jpg')),
-                          title: Text('4-4-2'),
-                          subtitle:
-                              Text('4 defenders, 4 midfielders, 2 forwards'),
-                        ),
+              content: StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) {
+                  return Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Form(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: ListTile(
+                              tileColor:
+                                  fourFourTwo ? Colors.blue : Colors.white,
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage('assets/442.jpg')),
+                              title: Text('4-4-2'),
+                              subtitle: Text(
+                                  '4 defenders, 4 midfielders, 2 forwards'),
+                              onTap: () {
+                                setState(() {
+                                  fourFourTwo = !fourFourTwo;
+                                });
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: ListTile(
+                              tileColor:
+                                  fourThreeThree ? Colors.blue : Colors.white,
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage('assets/433.jpg')),
+                              title: Text('4-3-3'),
+                              subtitle: Text(
+                                  '4 defenders, 3 midfielders, 3 forwards'),
+                              onTap: () {
+                                setState(() {
+                                  fourThreeThree = !fourThreeThree;
+                                });
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: ListTile(
+                              tileColor:
+                                  threeFiveTwo ? Colors.blue : Colors.white,
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 25.0,
+                                  backgroundImage:
+                                      AssetImage('assets/352.png')),
+                              title: Text('3-5-2'),
+                              subtitle: Text(
+                                  '3 defenders, 5 midfielders, 2 forwards'),
+                              onTap: () {
+                                setState(() {
+                                  threeFiveTwo = !threeFiveTwo;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 25.0,
-                              backgroundImage: AssetImage('assets/433.jpg')),
-                          title: Text('4-3-3'),
-                          subtitle:
-                              Text('4 defenders, 3 midfielders, 3 forwards'),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 25.0,
-                              backgroundImage: AssetImage('assets/352.png')),
-                          title: Text('3-5-2'),
-                          subtitle:
-                              Text('3 defenders, 5 midfielders, 2 forwards'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
             );
           },
