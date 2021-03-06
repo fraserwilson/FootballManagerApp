@@ -355,3 +355,11 @@ writeOnPdf() {
                     context,
                     MaterialPageRoute(
                         builder: (context) => PDFPreview(path: fullPath)));
+---------------------------------------------------------------------------------------------------------------------------------------------
+var firebaseUser = FirebaseAuth.instance.currentUser;
+                FirebaseFirestore.instance
+                    .collection('Results')
+                    .doc(firebaseUser.uid)
+                    .set({"teamName": _eventController.text}).then((value) {
+                  print('success!');
+                });
