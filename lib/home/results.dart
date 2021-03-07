@@ -1,6 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_helpers/firebase_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:screens_ui/home/add_events.dart';
+import 'package:screens_ui/models/app_event.dart';
+import 'package:screens_ui/services/event_firestore_services.dart';
+import 'package:screens_ui/shared/loading.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'list_of_results.dart';
 
 class ResultsPage extends StatefulWidget {
   @override
@@ -32,6 +39,19 @@ class _ResultsPageState extends State<ResultsPage> {
       appBar: AppBar(
         title: Text('Results of Games'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.baby_changing_station),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListOfResults(),
+                ),
+              );
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

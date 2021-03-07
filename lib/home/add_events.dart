@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
+import 'package:screens_ui/services/event_firestore_services.dart';
 
 class AddEvent extends StatefulWidget {
   final DateTime selectedDate;
@@ -31,7 +33,18 @@ class _AddEventState extends State<AddEvent> {
           Center(
             child: ElevatedButton(
               onPressed: () async {
-                _formKey.currentState.save();
+                bool validated = _formKey.currentState.validate();
+                print(validated);
+                if (validated) {
+                  _formKey.currentState.save();
+                  final data =
+                      Map<String, dynamic>.from(_formKey.currentState.value);
+                  String uid = FirebaseAuth.instance.currentUser.uid;
+                  data['userId'] = uid;
+                  await eventDBS.create(data);
+
+                  Navigator.pop(context);
+                }
               },
               child: Text('Save'),
             ),
@@ -42,10 +55,14 @@ class _AddEventState extends State<AddEvent> {
         padding: EdgeInsets.all(16.0),
         children: <Widget>[
           FormBuilder(
+            key: _formKey,
             child: Column(
               children: <Widget>[
                 FormBuilderTextField(
-                  attribute: 'Title',
+                  validators: [
+                    FormBuilderValidators.required(),
+                  ],
+                  attribute: 'title',
                   decoration: InputDecoration(
                     hintText: 'Add Title',
                     border: InputBorder.none,
@@ -54,7 +71,7 @@ class _AddEventState extends State<AddEvent> {
                 ),
                 Divider(),
                 FormBuilderTextField(
-                  attribute: 'Description',
+                  attribute: 'description',
                   maxLines: 5,
                   minLines: 1,
                   decoration: InputDecoration(
@@ -65,6 +82,7 @@ class _AddEventState extends State<AddEvent> {
                 ),
                 Divider(),
                 FormBuilderDateTimePicker(
+                  validators: [FormBuilderValidators.required()],
                   attribute: 'date',
                   initialValue: widget.selectedDate ?? DateTime.now(),
                   inputType: InputType.date,
