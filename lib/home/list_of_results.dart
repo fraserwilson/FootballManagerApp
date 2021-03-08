@@ -18,17 +18,16 @@ class _ListOfResultsState extends State<ListOfResults> {
         title: Text('List of Results'),
       ),
       body: StreamBuilder(
-          stream: eventDBS.streamList(),
+          stream: FirebaseFirestore.instance.collection('events').snapshots(),
           builder: (context, snapshot) {
-            final events = snapshot.data;
             return ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: events.length,
+              itemCount: snapshot.data.docs.length,
               itemBuilder: (context, index) {
-                AppEvent event = events[index];
+                DocumentSnapshot docSnap = snapshot.data.docs[index];
                 return ListTile(
-                  title: Text(event.title),
+                  title: Text(docSnap['title']),
                 );
               },
             );

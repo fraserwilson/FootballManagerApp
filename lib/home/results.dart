@@ -8,6 +8,7 @@ import 'package:screens_ui/services/event_firestore_services.dart';
 import 'package:screens_ui/shared/loading.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'list_of_results.dart';
+import 'package:screens_ui/home/event_details.dart';
 
 class ResultsPage extends StatefulWidget {
   @override
@@ -39,19 +40,6 @@ class _ResultsPageState extends State<ResultsPage> {
       appBar: AppBar(
         title: Text('Results of Games'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.baby_changing_station),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ListOfResults(),
-                ),
-              );
-            },
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -86,6 +74,81 @@ class _ResultsPageState extends State<ResultsPage> {
                 builders: CalendarBuilders(),
               ),
             ),
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('events')
+                    .where('userId',
+                        isEqualTo: FirebaseAuth.instance.currentUser.uid)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: snapshot.data.docs.length,
+                    itemBuilder: (context, index) {
+                      DocumentSnapshot docSnap = snapshot.data.docs[index];
+                      Timestamp t = docSnap['date'];
+                      DateTime d = DateTime.parse(t.toDate().toString());
+                      String formattedDate = "${d.day}/${d.month}/${d.year}";
+                      return ListTile(
+                          title: Text(docSnap['title']),
+                          subtitle: Text(formattedDate),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EventDetails(
+                                  title: docSnap['title'],
+                                  description: docSnap['description'],
+                                  date: formattedDate,
+                                  userId: docSnap['userId'],
+                                  yourTeamScore: docSnap['yourTeamScore'],
+                                  enemyTeamScore: docSnap['enemyTeamScore'],
+                                ),
+                              ),
+                            );
+                          },
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () async {
+                              final confirm = await showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Warning!'),
+                                      content: Text(
+                                          'Are you sure you want to delete?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, true);
+                                          },
+                                          child: Text('Delete'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context, false);
+                                          },
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                color: Colors.grey.shade700),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ) ??
+                                  false;
+                              if (confirm) {
+                                FirebaseFirestore.instance
+                                    .collection('events')
+                                    .doc(docSnap.id)
+                                    .delete();
+                              }
+                            },
+                          ));
+                    },
+                  );
+                }),
           ],
         ),
       ),

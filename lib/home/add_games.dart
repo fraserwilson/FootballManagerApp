@@ -4,14 +4,14 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:screens_ui/services/event_firestore_services.dart';
 
-class AddEvent extends StatefulWidget {
+class AddGames extends StatefulWidget {
   final DateTime selectedDate;
-  AddEvent({this.selectedDate});
+  AddGames({this.selectedDate});
   @override
-  _AddEventState createState() => _AddEventState();
+  _AddGamesState createState() => _AddGamesState();
 }
 
-class _AddEventState extends State<AddEvent> {
+class _AddGamesState extends State<AddGames> {
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _AddEventState extends State<AddEvent> {
                       Map<String, dynamic>.from(_formKey.currentState.value);
                   String uid = FirebaseAuth.instance.currentUser.uid;
                   data['userId'] = uid;
-                  await eventDBS.create(data);
+                  await scheduleDBS.create(data);
 
                   Navigator.pop(context);
                 }
@@ -77,24 +77,6 @@ class _AddEventState extends State<AddEvent> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Add Details',
-                    prefixIcon: Icon(Icons.short_text),
-                  ),
-                ),
-                Divider(),
-                FormBuilderTextField(
-                  attribute: 'yourTeamScore',
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Add Your Teams score',
-                    prefixIcon: Icon(Icons.short_text),
-                  ),
-                ),
-                Divider(),
-                FormBuilderTextField(
-                  attribute: 'enemyTeamScore',
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Add Opponents score',
                     prefixIcon: Icon(Icons.short_text),
                   ),
                 ),

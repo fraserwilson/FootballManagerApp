@@ -7,6 +7,13 @@ final eventDBS = DatabaseService<AppEvent>(
   toMap: (event) => event.toMap(),
 );
 
+final scheduleDBS = DatabaseService<AppEvent>(
+  AppDBConstants.scheduleCollection,
+  fromDS: (id, data) => AppEvent.fromDS(id, data),
+  toMap: (event) => event.toMap(),
+);
+
 class AppDBConstants {
   static const String eventsCollection = "events";
+  static const String scheduleCollection = "schedule";
 }
