@@ -14,6 +14,8 @@ class _TeamListState extends State<TeamList> {
     final teams = Provider.of<List<Team>>(context) ?? [];
 
     return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       itemCount: teams.length,
       itemBuilder: (context, index) {
         return TeamTile(team: teams[index]);

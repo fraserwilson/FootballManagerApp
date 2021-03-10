@@ -18,6 +18,8 @@ class _SettingsFormState extends State<SettingsForm> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     final user = Provider.of<ConvertedUser>(context);
     return StreamBuilder<UserData>(
         stream: DatabaseService(uid: user.uid).userData,
@@ -30,10 +32,10 @@ class _SettingsFormState extends State<SettingsForm> {
                 children: <Widget>[
                   Text(
                     'Update your teams settings',
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 18),
                   ),
                   SizedBox(
-                    height: 20.0,
+                    height: height * 0.03,
                   ),
                   TextFormField(
                     initialValue: _currentTeamName ?? userData.teamName,
@@ -43,7 +45,7 @@ class _SettingsFormState extends State<SettingsForm> {
                     onChanged: (val) => setState(() => _currentTeamName = val),
                   ),
                   SizedBox(
-                    height: 20.0,
+                    height: height * 0.03,
                   ),
                   TextFormField(
                     initialValue: _currentManagerName ?? userData.managerName,
@@ -54,21 +56,32 @@ class _SettingsFormState extends State<SettingsForm> {
                         setState(() => _currentManagerName = val),
                   ),
                   SizedBox(
-                    height: 20.0,
+                    height: height * 0.12,
                   ),
-                  RaisedButton(
-                    color: Colors.blue,
-                    onPressed: () async {
-                      if (_formKey.currentState.validate()) {
-                        await DatabaseService(uid: user.uid).updateUserData(
-                            _currentTeamName ?? userData.teamName,
-                            _currentManagerName ?? userData.managerName);
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Text(
-                      'Update',
-                      style: TextStyle(color: Colors.white),
+                  SizedBox(
+                    height: height * 0.08,
+                    width: width,
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      color: Color.fromRGBO(186, 15, 48, 1),
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          await DatabaseService(uid: user.uid).updateUserData(
+                              _currentTeamName ?? userData.teamName,
+                              _currentManagerName ?? userData.managerName);
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text(
+                        'Update',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   )
                 ],

@@ -21,12 +21,18 @@ class _LoginInScreenState extends State<LoginInScreen> {
   String error = ' ';
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return loading
         ? Loading()
         : Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              iconTheme: IconThemeData(color: Colors.white),
-              title: Text("Login Screen"),
+              backgroundColor: Color.fromRGBO(186, 15, 48, 1),
+              title: Text(
+                "Login Screen",
+                style: TextStyle(color: Colors.white),
+              ),
               actions: <Widget>[
                 FlatButton.icon(
                     onPressed: () {
@@ -36,7 +42,10 @@ class _LoginInScreenState extends State<LoginInScreen> {
                       Icons.person,
                       color: Colors.white,
                     ),
-                    label: Text("Register"))
+                    label: Text(
+                      "Register",
+                      style: TextStyle(color: Colors.white),
+                    ))
               ],
             ),
             body: Container(
@@ -47,7 +56,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                   child: Column(
                     children: <Widget>[
                       SizedBox(
-                        height: 50.0,
+                        height: height * 0.04,
                       ),
                       Center(
                         child: CircleAvatar(
@@ -57,51 +66,73 @@ class _LoginInScreenState extends State<LoginInScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 50.0,
+                        height: height * 0.1,
                       ),
                       TextFormField(
                         validator: (val) =>
                             val.isEmpty ? 'Enter an email' : null,
                         obscureText: false,
-                        style: TextStyle(fontSize: 20.0),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
                         decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          contentPadding: EdgeInsets.all(20),
                           hintText: 'Username',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(70.0)),
+                          hintStyle: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(70.0),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black)),
                         ),
                         onChanged: (val) {
                           setState(() => email = val);
                         },
                       ),
                       SizedBox(
-                        height: 30.0,
+                        height: height * 0.05,
                       ),
                       TextFormField(
                         validator: (val) => val.length < 6
                             ? 'Enter a password that is 6 characters long'
                             : null,
                         obscureText: true,
-                        style: TextStyle(fontSize: 20.0),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        ),
                         decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          contentPadding: EdgeInsets.all(20),
                           hintText: 'Password',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0)),
+                          hintStyle: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(70.0),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black)),
                         ),
                         onChanged: (val) {
                           setState(() => password = val);
                         },
                       ),
                       SizedBox(
-                        height: 30.0,
+                        height: height * 0.18,
                       ),
-                      Material(
-                        elevation: 0.0,
-                        borderRadius: BorderRadius.circular(30.0),
-                        child: MaterialButton(
+                      SizedBox(
+                        width: width,
+                        height: height * 0.08,
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
                           padding: EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
@@ -117,18 +148,16 @@ class _LoginInScreenState extends State<LoginInScreen> {
                               }
                             }
                           },
-                          color: Colors.blue,
+                          color: Color.fromRGBO(186, 15, 48, 1),
                           child: Text(
                             "Login",
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                                fontSize: 25,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 12.0,
                       ),
                       Text(
                         error,

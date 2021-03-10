@@ -11,6 +11,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     void _showSettingsPanel() {
       showModalBottomSheet(
           context: context,
@@ -26,7 +28,9 @@ class Home extends StatelessWidget {
       value: DatabaseService().teams,
       child: Container(
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
+            backgroundColor: Color.fromRGBO(186, 15, 48, 1),
             title: Text('Team List'),
             elevation: 0.0,
             actions: <Widget>[
@@ -50,7 +54,23 @@ class Home extends StatelessWidget {
                       Text('Settings', style: TextStyle(color: Colors.white)))
             ],
           ),
-          body: TeamList(),
+          body: SingleChildScrollView(
+              child: Column(
+            children: [
+              TeamList(),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              Text(
+                'Please tap on team tile to view players',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              )
+            ],
+          )),
         ),
       ),
     );
