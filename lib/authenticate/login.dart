@@ -25,13 +25,17 @@ class _LoginInScreenState extends State<LoginInScreen> {
         ? Loading()
         : Scaffold(
             appBar: AppBar(
+              iconTheme: IconThemeData(color: Colors.white),
               title: Text("Login Screen"),
               actions: <Widget>[
                 FlatButton.icon(
                     onPressed: () {
                       widget.toggleView();
                     },
-                    icon: Icon(Icons.person),
+                    icon: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
                     label: Text("Register"))
               ],
             ),

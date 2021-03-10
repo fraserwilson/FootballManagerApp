@@ -180,6 +180,8 @@ class _SummaryPageState extends State<SummaryPage> {
                               onTap: () {
                                 setState(() {
                                   counterAttack = !counterAttack;
+                                  tikiTaka = false;
+                                  longBalls = false;
                                 });
                               },
                             ),
@@ -199,6 +201,8 @@ class _SummaryPageState extends State<SummaryPage> {
                               onTap: () {
                                 setState(() {
                                   tikiTaka = !tikiTaka;
+                                  longBalls = false;
+                                  counterAttack = false;
                                 });
                               },
                             ),
@@ -218,6 +222,8 @@ class _SummaryPageState extends State<SummaryPage> {
                               onTap: () {
                                 setState(() {
                                   longBalls = !longBalls;
+                                  tikiTaka = false;
+                                  counterAttack = false;
                                 });
                               },
                             ),
@@ -260,6 +266,8 @@ class _SummaryPageState extends State<SummaryPage> {
                               onTap: () {
                                 setState(() {
                                   fourFourTwo = !fourFourTwo;
+                                  fourThreeThree = false;
+                                  threeFiveTwo = false;
                                 });
                               },
                             ),
@@ -280,6 +288,8 @@ class _SummaryPageState extends State<SummaryPage> {
                               onTap: () {
                                 setState(() {
                                   fourThreeThree = !fourThreeThree;
+                                  fourFourTwo = false;
+                                  threeFiveTwo = false;
                                 });
                               },
                             ),
@@ -300,6 +310,8 @@ class _SummaryPageState extends State<SummaryPage> {
                               onTap: () {
                                 setState(() {
                                   threeFiveTwo = !threeFiveTwo;
+                                  fourFourTwo = false;
+                                  fourThreeThree = false;
                                 });
                               },
                             ),
