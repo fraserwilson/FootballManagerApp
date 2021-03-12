@@ -12,7 +12,7 @@ class Wrapper extends StatelessWidget {
 
     //return either login(if user is not logged in) or squad list(if user is logged in)
     if (user == null) {
-      return Home();
+      return Authenticate();
     } else {
       return Home();
     }

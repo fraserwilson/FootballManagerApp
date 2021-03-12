@@ -21,126 +21,139 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
   bool _isAvaliable = false;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     final user = Provider.of<ConvertedUser>(context);
     return Scaffold(
+      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomPadding: false,
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(186, 15, 48, 1),
+        title: Text('ADD PLAYERS'),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Text("Add Player", style: TextStyle(fontSize: 18.0)),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  )),
-                  validator: (val) =>
-                      val.isEmpty ? 'Please enter a name' : null,
-                  onChanged: (val) => setState(() => _playerName = val),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  )),
-                  validator: (val) =>
-                      val.isEmpty ? 'Please enter a position' : null,
-                  onChanged: (val) => setState(() => _playerPosition = val),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text("Attack Stat", style: TextStyle(fontSize: 12.0)),
-                Slider(
-                  value: (_attackStat ?? 1).toDouble(),
-                  min: 1,
-                  max: 10,
-                  divisions: 9,
-                  onChanged: (val) => setState(() => _attackStat = val.round()),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text("Midfield Stat", style: TextStyle(fontSize: 12.0)),
-                Slider(
-                  value: (_midfieldStat ?? 1).toDouble(),
-                  min: 1,
-                  max: 10,
-                  divisions: 9,
-                  onChanged: (val) =>
-                      setState(() => _midfieldStat = val.round()),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text("Defense Stat", style: TextStyle(fontSize: 12.0)),
-                Slider(
-                  value: (_defenseStat ?? 1).toDouble(),
-                  min: 1,
-                  max: 10,
-                  divisions: 9,
-                  onChanged: (val) =>
-                      setState(() => _defenseStat = val.round()),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text("Goalkeeping Stat", style: TextStyle(fontSize: 12.0)),
-                Slider(
-                  value: (_goalkeppingStat ?? 1).toDouble(),
-                  min: 1,
-                  max: 10,
-                  divisions: 9,
-                  onChanged: (val) =>
-                      setState(() => _goalkeppingStat = val.round()),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text('Is this player avaliable?'),
-                Checkbox(
-                    tristate: false,
-                    value: _isAvaliable,
-                    onChanged: (bool value) {
-                      setState(() {
-                        _isAvaliable = value;
-                      });
-                    }),
-                RaisedButton(
-                    color: Colors.blue,
-                    child: Text(
-                      'Add',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () {
-                      final databaseReference = FirebaseFirestore.instance;
-                      void createPlayer() async {
-                        var ref = databaseReference.collection('Players').doc();
-                        await ref.set({
-                          'uid': user.uid,
-                          'name': _playerName,
-                          'position': _playerPosition,
-                          'attack': _attackStat,
-                          'midfield': _midfieldStat,
-                          'defense': _defenseStat,
-                          'goalkeeping': _goalkeppingStat,
-                          'isAvaliable': _isAvaliable,
-                          'docId': ref.id
+        child: Container(
+          margin: EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Form(
+            key: _formKey,
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: height * 0.03,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    )),
+                    validator: (val) =>
+                        val.isEmpty ? 'Please enter a name' : null,
+                    onChanged: (val) => setState(() => _playerName = val),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    )),
+                    validator: (val) =>
+                        val.isEmpty ? 'Please enter a position' : null,
+                    onChanged: (val) => setState(() => _playerPosition = val),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text("Attack Stat", style: TextStyle(fontSize: 12.0)),
+                  Slider(
+                    value: (_attackStat ?? 1).toDouble(),
+                    min: 1,
+                    max: 10,
+                    divisions: 9,
+                    onChanged: (val) =>
+                        setState(() => _attackStat = val.round()),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text("Midfield Stat", style: TextStyle(fontSize: 12.0)),
+                  Slider(
+                    value: (_midfieldStat ?? 1).toDouble(),
+                    min: 1,
+                    max: 10,
+                    divisions: 9,
+                    onChanged: (val) =>
+                        setState(() => _midfieldStat = val.round()),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text("Defense Stat", style: TextStyle(fontSize: 12.0)),
+                  Slider(
+                    value: (_defenseStat ?? 1).toDouble(),
+                    min: 1,
+                    max: 10,
+                    divisions: 9,
+                    onChanged: (val) =>
+                        setState(() => _defenseStat = val.round()),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text("Goalkeeping Stat", style: TextStyle(fontSize: 12.0)),
+                  Slider(
+                    value: (_goalkeppingStat ?? 1).toDouble(),
+                    min: 1,
+                    max: 10,
+                    divisions: 9,
+                    onChanged: (val) =>
+                        setState(() => _goalkeppingStat = val.round()),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text('Is this player avaliable?'),
+                  Checkbox(
+                      tristate: false,
+                      value: _isAvaliable,
+                      onChanged: (bool value) {
+                        setState(() {
+                          _isAvaliable = value;
                         });
-                        print(ref.id);
-                      }
+                      }),
+                  RaisedButton(
+                      color: Colors.blue,
+                      child: Text(
+                        'Add',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        final databaseReference = FirebaseFirestore.instance;
+                        void createPlayer() async {
+                          var ref =
+                              databaseReference.collection('Players').doc();
+                          await ref.set({
+                            'uid': user.uid,
+                            'name': _playerName,
+                            'position': _playerPosition,
+                            'attack': _attackStat,
+                            'midfield': _midfieldStat,
+                            'defense': _defenseStat,
+                            'goalkeeping': _goalkeppingStat,
+                            'isAvaliable': _isAvaliable,
+                            'docId': ref.id
+                          });
+                          print(ref.id);
+                        }
 
-                      createPlayer();
-                      Navigator.pop(context);
-                    })
-              ],
+                        createPlayer();
+                        Navigator.pop(context);
+                      })
+                ],
+              ),
             ),
           ),
         ),

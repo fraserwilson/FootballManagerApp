@@ -12,10 +12,10 @@ class _TeamPlayersState extends State<TeamPlayers> {
   Widget build(BuildContext context) {
     void _showAddPlayer() {
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
             return Container(
-              padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 60.0),
               child: AddPlayersFo(),
             );
           });

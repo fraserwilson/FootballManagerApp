@@ -81,251 +81,331 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                   onPressed: () {
                                     FirebaseFirestore.instance
                                         .collection('Players')
-                                        .doc(snapshot.data.docs[index]['docId'])
+                                        .doc(snapshot.data.docs[index])
                                         .delete();
                                   }),
                               FlatButton.icon(
-                                icon: Icon(Icons.settings),
-                                label: Text(''),
-                                onPressed: () {
-                                  print(snapshot.data.docs[index]['docId']);
-                                  showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    context: context,
-                                    builder: (context) {
-                                      return Scaffold(
-                                        resizeToAvoidBottomInset: true,
-                                        resizeToAvoidBottomPadding: false,
-                                        appBar: AppBar(
-                                          title: Text('UPDATE PLAYER'),
-                                          centerTitle: true,
-                                        ),
-                                        body: SingleChildScrollView(
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                                left: 20.0, right: 20.0),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Text(snapshot.data.docs[index]
-                                                    ['docId']),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Text('Player Name: '),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormField(
-                                                  textAlign: TextAlign.center,
-                                                  controller: _name,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.fromLTRB(
-                                                            20.0,
-                                                            15.0,
-                                                            20.0,
-                                                            15.0),
-                                                    hintText: 'Player Name',
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    70.0)),
+                                  icon: Icon(Icons.settings),
+                                  label: Text(''),
+                                  onPressed: () {
+                                    print(snapshot.data.docs[index]['docId']);
+                                    showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      context: context,
+                                      builder: (context) {
+                                        return StatefulBuilder(
+                                          builder: (BuildContext context,
+                                              StateSetter setState) {
+                                            return Scaffold(
+                                              resizeToAvoidBottomInset: true,
+                                              resizeToAvoidBottomPadding: false,
+                                              appBar: AppBar(
+                                                backgroundColor: Color.fromRGBO(
+                                                    186, 15, 48, 1),
+                                                title: Text('UPDATE PLAYER'),
+                                                centerTitle: true,
+                                              ),
+                                              body: SingleChildScrollView(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                      left: 20.0, right: 20.0),
+                                                  child: Column(
+                                                    children: <Widget>[
+                                                      Text(snapshot
+                                                              .data.docs[index]
+                                                          ['docId']),
+                                                      SizedBox(
+                                                        height: 20.0,
+                                                      ),
+                                                      Text('Player Name: '),
+                                                      SizedBox(
+                                                        height: 10.0,
+                                                      ),
+                                                      TextFormField(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        controller: _name,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .fromLTRB(
+                                                                      20.0,
+                                                                      15.0,
+                                                                      20.0,
+                                                                      15.0),
+                                                          hintText:
+                                                              'Player Name',
+                                                          enabledBorder: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          70.0),
+                                                              borderSide: BorderSide(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .black)),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20.0,
+                                                      ),
+                                                      Text('Player Position: '),
+                                                      SizedBox(
+                                                        height: 10.0,
+                                                      ),
+                                                      TextFormField(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        controller: _position,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .fromLTRB(
+                                                                      20.0,
+                                                                      15.0,
+                                                                      20.0,
+                                                                      15.0),
+                                                          hintText:
+                                                              'Player Position',
+                                                          enabledBorder: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          70.0),
+                                                              borderSide: BorderSide(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .black)),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20.0,
+                                                      ),
+                                                      Text('Player Attack: '),
+                                                      SizedBox(
+                                                        height: 10.0,
+                                                      ),
+                                                      TextFormField(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        inputFormatters: [
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
+                                                        controller: _attack,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .fromLTRB(
+                                                                      20.0,
+                                                                      15.0,
+                                                                      20.0,
+                                                                      15.0),
+                                                          hintText:
+                                                              'Player Attack',
+                                                          enabledBorder: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          70.0),
+                                                              borderSide: BorderSide(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .black)),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20.0,
+                                                      ),
+                                                      Text('Player Midfield: '),
+                                                      SizedBox(
+                                                        height: 10.0,
+                                                      ),
+                                                      TextFormField(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        inputFormatters: [
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
+                                                        controller: _midfield,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .fromLTRB(
+                                                                      20.0,
+                                                                      15.0,
+                                                                      20.0,
+                                                                      15.0),
+                                                          hintText:
+                                                              'Player Midfield',
+                                                          enabledBorder: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          70.0),
+                                                              borderSide: BorderSide(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .black)),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20.0,
+                                                      ),
+                                                      Text('Player Defense: '),
+                                                      SizedBox(
+                                                        height: 10.0,
+                                                      ),
+                                                      TextFormField(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        inputFormatters: [
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
+                                                        controller: _defense,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .fromLTRB(
+                                                                      20.0,
+                                                                      15.0,
+                                                                      20.0,
+                                                                      15.0),
+                                                          hintText:
+                                                              'Player Defense',
+                                                          enabledBorder: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          70.0),
+                                                              borderSide: BorderSide(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .black)),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20.0,
+                                                      ),
+                                                      Text(
+                                                          'Player Goalkeeping: '),
+                                                      SizedBox(
+                                                        height: 10.0,
+                                                      ),
+                                                      TextFormField(
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        inputFormatters: [
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly
+                                                        ],
+                                                        controller:
+                                                            _goalkeeping,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .fromLTRB(
+                                                                      20.0,
+                                                                      15.0,
+                                                                      20.0,
+                                                                      15.0),
+                                                          hintText:
+                                                              'Player Goalkeeping',
+                                                          enabledBorder: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          70.0),
+                                                              borderSide: BorderSide(
+                                                                  width: 2,
+                                                                  color: Colors
+                                                                      .black)),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 20.0,
+                                                      ),
+                                                      Text(
+                                                          'Player Avaliability: '),
+                                                      Checkbox(
+                                                          tristate: false,
+                                                          activeColor:
+                                                              Color.fromRGBO(
+                                                                  186,
+                                                                  15,
+                                                                  48,
+                                                                  1),
+                                                          checkColor:
+                                                              Colors.white,
+                                                          value: _isAvaliable,
+                                                          onChanged:
+                                                              (bool value) {
+                                                            setState(() {
+                                                              _isAvaliable =
+                                                                  value;
+                                                            });
+                                                          }),
+                                                      RaisedButton(
+                                                          color: Color.fromRGBO(
+                                                              186, 15, 48, 1),
+                                                          child: Text(
+                                                            'Update',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                          onPressed: () {
+                                                            FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    'Players')
+                                                                .doc(snapshot
+                                                                            .data
+                                                                            .docs[
+                                                                        index]
+                                                                    ['docId'])
+                                                                .update({
+                                                              "name":
+                                                                  _name.text,
+                                                              "position":
+                                                                  _position
+                                                                      .text,
+                                                              "attack": int
+                                                                  .parse(_attack
+                                                                      .text),
+                                                              "midfield": int
+                                                                  .parse(_attack
+                                                                      .text),
+                                                              "defense": int
+                                                                  .parse(_attack
+                                                                      .text),
+                                                              "goalkeeping": int
+                                                                  .parse(_attack
+                                                                      .text),
+                                                              "isAvaliable":
+                                                                  _isAvaliable
+                                                            });
+                                                            Navigator.pop(
+                                                                context);
+                                                          }),
+                                                    ],
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Text('Player Position: '),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormField(
-                                                  textAlign: TextAlign.center,
-                                                  controller: _position,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.fromLTRB(
-                                                            20.0,
-                                                            15.0,
-                                                            20.0,
-                                                            15.0),
-                                                    hintText: 'Player Position',
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    70.0)),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Text('Player Attack: '),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormField(
-                                                  textAlign: TextAlign.center,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  controller: _attack,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.fromLTRB(
-                                                            20.0,
-                                                            15.0,
-                                                            20.0,
-                                                            15.0),
-                                                    hintText: 'Player Attack',
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    70.0)),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Text('Player Midfield: '),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormField(
-                                                  textAlign: TextAlign.center,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  controller: _midfield,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.fromLTRB(
-                                                            20.0,
-                                                            15.0,
-                                                            20.0,
-                                                            15.0),
-                                                    hintText: 'Player Midfield',
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    70.0)),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Text('Player Defense: '),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormField(
-                                                  textAlign: TextAlign.center,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  controller: _defense,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.fromLTRB(
-                                                            20.0,
-                                                            15.0,
-                                                            20.0,
-                                                            15.0),
-                                                    hintText: 'Player Defense',
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    70.0)),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Text('Player Goalkeeping: '),
-                                                SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                TextFormField(
-                                                  textAlign: TextAlign.center,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  controller: _goalkeeping,
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.fromLTRB(
-                                                            20.0,
-                                                            15.0,
-                                                            20.0,
-                                                            15.0),
-                                                    hintText:
-                                                        'Player Goalkeeping',
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    70.0)),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 20.0,
-                                                ),
-                                                Text('Player Avaliability: '),
-                                                Checkbox(
-                                                    tristate: false,
-                                                    value: _isAvaliable,
-                                                    onChanged: (value) {
-                                                      setState(() {
-                                                        _isAvaliable = value;
-                                                      });
-                                                    }),
-                                                RaisedButton(
-                                                    color: Colors.blue,
-                                                    child: Text(
-                                                      'UPDATE',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                    onPressed: () {
-                                                      FirebaseFirestore.instance
-                                                          .collection('Players')
-                                                          .doc(snapshot.data
-                                                                  .docs[index]
-                                                              ['docId'])
-                                                          .update({
-                                                        "name": _name.text,
-                                                        "position":
-                                                            _position.text,
-                                                        "attack": int.parse(
-                                                            _attack.text),
-                                                        "midfield": int.parse(
-                                                            _attack.text),
-                                                        "defense": int.parse(
-                                                            _attack.text),
-                                                        "goalkeeping":
-                                                            int.parse(
-                                                                _attack.text),
-                                                        //"isAvaliable": _isAvaliable
-                                                      });
-                                                      Navigator.pop(context);
-                                                    }),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                    );
+                                  })
                             ],
                           ),
                         ),
