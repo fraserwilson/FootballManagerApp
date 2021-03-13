@@ -33,6 +33,7 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(186, 15, 48, 1),
         title: Text('Schedule Games'),
         centerTitle: true,
       ),
@@ -44,18 +45,30 @@ class _SchedulePageState extends State<SchedulePage> {
               clipBehavior: Clip.antiAlias,
               margin: EdgeInsets.all(8.0),
               child: TableCalendar(
+                daysOfWeekStyle: DaysOfWeekStyle(
+                    weekdayStyle: TextStyle(color: Colors.black),
+                    weekendStyle:
+                        TextStyle(color: Color.fromRGBO(186, 15, 48, 1))),
+                initialCalendarFormat: CalendarFormat.week,
                 calendarController: _controller,
                 headerStyle: HeaderStyle(
-                  decoration: BoxDecoration(color: Colors.blue),
+                  decoration:
+                      BoxDecoration(color: Color.fromRGBO(186, 15, 48, 1)),
                   headerMargin: EdgeInsets.only(bottom: 8.0),
-                  titleTextStyle: TextStyle(color: Colors.white),
+                  titleTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                   formatButtonDecoration: BoxDecoration(
                     border: Border.all(color: Colors.white),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   formatButtonTextStyle: TextStyle(
                     color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
+                  formatButtonShowsNext: false,
                   leftChevronIcon: Icon(
                     Icons.chevron_left,
                     color: Colors.white,
@@ -65,7 +78,14 @@ class _SchedulePageState extends State<SchedulePage> {
                     color: Colors.white,
                   ),
                 ),
-                calendarStyle: CalendarStyle(),
+                calendarStyle: CalendarStyle(
+                    todayColor: Colors.black,
+                    todayStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                    selectedColor: Color.fromRGBO(186, 15, 48, 1)),
                 builders: CalendarBuilders(),
               ),
             ),
@@ -146,6 +166,7 @@ class _SchedulePageState extends State<SchedulePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(186, 15, 48, 1),
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(

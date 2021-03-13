@@ -12,12 +12,12 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
   final _formKey = GlobalKey<FormState>();
 
   //form values
-  String _playerName;
-  String _playerPosition;
-  int _attackStat;
-  int _midfieldStat;
-  int _defenseStat;
-  int _goalkeppingStat;
+  TextEditingController _name = new TextEditingController();
+  TextEditingController _position = new TextEditingController();
+  TextEditingController _attack = new TextEditingController();
+  TextEditingController _midfield = new TextEditingController();
+  TextEditingController _defense = new TextEditingController();
+  TextEditingController _goalkeeping = new TextEditingController();
   bool _isAvaliable = false;
   @override
   Widget build(BuildContext context) {
@@ -43,115 +43,176 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   SizedBox(
                     height: height * 0.03,
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    )),
-                    validator: (val) =>
-                        val.isEmpty ? 'Please enter a name' : null,
-                    onChanged: (val) => setState(() => _playerName = val),
-                  ),
+                  Text('Player Name: '),
                   SizedBox(
                     height: 10.0,
                   ),
                   TextFormField(
+                    textAlign: TextAlign.center,
+                    controller: _name,
                     decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    )),
-                    validator: (val) =>
-                        val.isEmpty ? 'Please enter a position' : null,
-                    onChanged: (val) => setState(() => _playerPosition = val),
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: 'Player Name',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Player Position: '),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Text("Attack Stat", style: TextStyle(fontSize: 12.0)),
-                  Slider(
-                    value: (_attackStat ?? 1).toDouble(),
-                    min: 1,
-                    max: 10,
-                    divisions: 9,
-                    onChanged: (val) =>
-                        setState(() => _attackStat = val.round()),
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    controller: _position,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: 'Player Position',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Player Attack: '),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Text("Midfield Stat", style: TextStyle(fontSize: 12.0)),
-                  Slider(
-                    value: (_midfieldStat ?? 1).toDouble(),
-                    min: 1,
-                    max: 10,
-                    divisions: 9,
-                    onChanged: (val) =>
-                        setState(() => _midfieldStat = val.round()),
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    controller: _attack,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: 'Player Attack',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Player Midfield: '),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Text("Defense Stat", style: TextStyle(fontSize: 12.0)),
-                  Slider(
-                    value: (_defenseStat ?? 1).toDouble(),
-                    min: 1,
-                    max: 10,
-                    divisions: 9,
-                    onChanged: (val) =>
-                        setState(() => _defenseStat = val.round()),
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    controller: _midfield,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: 'Player Midfield',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Player Defense: '),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Text("Goalkeeping Stat", style: TextStyle(fontSize: 12.0)),
-                  Slider(
-                    value: (_goalkeppingStat ?? 1).toDouble(),
-                    min: 1,
-                    max: 10,
-                    divisions: 9,
-                    onChanged: (val) =>
-                        setState(() => _goalkeppingStat = val.round()),
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    controller: _defense,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: 'Player Defense',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
                   ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Player Goalkeeping: '),
                   SizedBox(
                     height: 10.0,
                   ),
-                  Text('Is this player avaliable?'),
+                  TextFormField(
+                    textAlign: TextAlign.center,
+                    controller: _goalkeeping,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                      hintText: 'Player Goalkeeping',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Text('Player Avaliability: '),
                   Checkbox(
                       tristate: false,
+                      activeColor: Color.fromRGBO(186, 15, 48, 1),
+                      checkColor: Colors.white,
                       value: _isAvaliable,
                       onChanged: (bool value) {
                         setState(() {
                           _isAvaliable = value;
                         });
                       }),
-                  RaisedButton(
-                      color: Colors.blue,
-                      child: Text(
-                        'Add',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        final databaseReference = FirebaseFirestore.instance;
-                        void createPlayer() async {
-                          var ref =
-                              databaseReference.collection('Players').doc();
-                          await ref.set({
-                            'uid': user.uid,
-                            'name': _playerName,
-                            'position': _playerPosition,
-                            'attack': _attackStat,
-                            'midfield': _midfieldStat,
-                            'defense': _defenseStat,
-                            'goalkeeping': _goalkeppingStat,
-                            'isAvaliable': _isAvaliable,
-                            'docId': ref.id
-                          });
-                          print(ref.id);
-                        }
+                  Container(
+                    width: width,
+                    child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                        ),
+                        padding: EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+                        color: Color.fromRGBO(186, 15, 48, 1),
+                        child: Text(
+                          'Add',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          final databaseReference = FirebaseFirestore.instance;
+                          void createPlayer() async {
+                            var ref =
+                                databaseReference.collection('Players').doc();
+                            await ref.set({
+                              'uid': user.uid,
+                              'name': _name,
+                              'position': _position,
+                              'attack': _attack,
+                              'midfield': _midfield,
+                              'defense': _defense,
+                              'goalkeeping': _goalkeeping,
+                              'isAvaliable': _isAvaliable,
+                              'docId': ref.id
+                            });
+                            print(ref.id);
+                          }
 
-                        createPlayer();
-                        Navigator.pop(context);
-                      })
+                          createPlayer();
+                          Navigator.pop(context);
+                        }),
+                  )
                 ],
               ),
             ),

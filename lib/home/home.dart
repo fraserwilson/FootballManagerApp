@@ -31,7 +31,10 @@ class Home extends StatelessWidget {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Color.fromRGBO(186, 15, 48, 1),
-            title: Text('Team List'),
+            title: Text(
+              'Team List',
+              style: TextStyle(color: Colors.white, fontFamily: 'SyneMono'),
+            ),
             elevation: 0.0,
             actions: <Widget>[
               FlatButton.icon(
@@ -41,7 +44,7 @@ class Home extends StatelessWidget {
                 ),
                 label: Text(
                   'logout',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontFamily: 'SyneMono'),
                 ),
                 onPressed: () async {
                   await _auth.signOut();
@@ -50,8 +53,9 @@ class Home extends StatelessWidget {
               FlatButton.icon(
                   onPressed: () => _showSettingsPanel(),
                   icon: Icon(Icons.settings, color: Colors.white),
-                  label:
-                      Text('Settings', style: TextStyle(color: Colors.white)))
+                  label: Text('Settings',
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'SyneMono')))
             ],
           ),
           body: SingleChildScrollView(
@@ -67,7 +71,8 @@ class Home extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                    color: Colors.black,
+                    fontFamily: 'SyneMono'),
               )
             ],
           )),

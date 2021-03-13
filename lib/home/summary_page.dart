@@ -146,6 +146,8 @@ class _SummaryPageState extends State<SummaryPage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     void onTabTapped(int index) {
       setState(() {
         _currentIndex = index;
@@ -167,16 +169,20 @@ class _SummaryPageState extends State<SummaryPage> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.0),
                             child: ListTile(
-                              tileColor:
-                                  counterAttack ? Colors.blue : Colors.white,
+                              tileColor: counterAttack
+                                  ? Color.fromRGBO(186, 15, 48, 1)
+                                  : Colors.white,
                               leading: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   radius: 25.0,
                                   backgroundImage:
                                       AssetImage('assets/running.jpg')),
-                              title: Text('Counter-Attack'),
-                              subtitle:
-                                  Text('Fast, reactive free-flowing play'),
+                              title: Text('Counter-Attack',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18)),
+                              subtitle: Text('Fast, reactive free-flowing play',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16)),
                               onTap: () {
                                 setState(() {
                                   counterAttack = !counterAttack;
@@ -189,15 +195,21 @@ class _SummaryPageState extends State<SummaryPage> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.0),
                             child: ListTile(
-                              tileColor: tikiTaka ? Colors.blue : Colors.white,
+                              tileColor: tikiTaka
+                                  ? Color.fromRGBO(186, 15, 48, 1)
+                                  : Colors.white,
                               leading: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   radius: 25.0,
                                   backgroundImage:
                                       AssetImage('assets/passing.png')),
-                              title: Text('Tiki-Taka'),
+                              title: Text('Tiki-Taka',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18)),
                               subtitle: Text(
-                                  'Short passes, with the intent to break down opposition teams'),
+                                  'Short passes, with the intent to break down opposition teams',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16)),
                               onTap: () {
                                 setState(() {
                                   tikiTaka = !tikiTaka;
@@ -210,15 +222,21 @@ class _SummaryPageState extends State<SummaryPage> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.0),
                             child: ListTile(
-                              tileColor: longBalls ? Colors.blue : Colors.white,
+                              tileColor: longBalls
+                                  ? Color.fromRGBO(186, 15, 48, 1)
+                                  : Colors.white,
                               leading: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   radius: 25.0,
                                   backgroundImage:
                                       AssetImage('assets/crossing.png')),
-                              title: Text('Long balls'),
+                              title: Text('Long balls',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18)),
                               subtitle: Text(
-                                  'Constant crosses into the box, generally after absorbing large amounts of pressure'),
+                                  'Constant crosses into the box, generally after absorbing large amounts of pressure',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16)),
                               onTap: () {
                                 setState(() {
                                   longBalls = !longBalls;
@@ -253,16 +271,22 @@ class _SummaryPageState extends State<SummaryPage> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.0),
                             child: ListTile(
-                              tileColor:
-                                  fourFourTwo ? Colors.blue : Colors.white,
+                              tileColor: fourFourTwo
+                                  ? Color.fromRGBO(186, 15, 48, 1)
+                                  : Colors.white,
                               leading: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   radius: 25.0,
                                   backgroundImage:
                                       AssetImage('assets/442.jpg')),
-                              title: Text('4-4-2'),
+                              title: Text('4-4-2',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18)),
                               subtitle: Text(
-                                  '4 defenders, 4 midfielders, 2 forwards'),
+                                '4 defenders, 4 midfielders, 2 forwards',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16),
+                              ),
                               onTap: () {
                                 setState(() {
                                   fourFourTwo = !fourFourTwo;
@@ -275,16 +299,21 @@ class _SummaryPageState extends State<SummaryPage> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.0),
                             child: ListTile(
-                              tileColor:
-                                  fourThreeThree ? Colors.blue : Colors.white,
+                              tileColor: fourThreeThree
+                                  ? Color.fromRGBO(186, 15, 48, 1)
+                                  : Colors.white,
                               leading: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   radius: 25.0,
                                   backgroundImage:
                                       AssetImage('assets/433.jpg')),
-                              title: Text('4-3-3'),
+                              title: Text('4-3-3',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18)),
                               subtitle: Text(
-                                  '4 defenders, 3 midfielders, 3 forwards'),
+                                  '4 defenders, 3 midfielders, 3 forwards',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16)),
                               onTap: () {
                                 setState(() {
                                   fourThreeThree = !fourThreeThree;
@@ -297,16 +326,21 @@ class _SummaryPageState extends State<SummaryPage> {
                           Padding(
                             padding: EdgeInsets.only(top: 8.0),
                             child: ListTile(
-                              tileColor:
-                                  threeFiveTwo ? Colors.blue : Colors.white,
+                              tileColor: threeFiveTwo
+                                  ? Color.fromRGBO(186, 15, 48, 1)
+                                  : Colors.white,
                               leading: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   radius: 25.0,
                                   backgroundImage:
                                       AssetImage('assets/352.png')),
-                              title: Text('3-5-2'),
+                              title: Text('3-5-2',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18)),
                               subtitle: Text(
-                                  '3 defenders, 5 midfielders, 2 forwards'),
+                                  '3 defenders, 5 midfielders, 2 forwards',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16)),
                               onTap: () {
                                 setState(() {
                                   threeFiveTwo = !threeFiveTwo;
@@ -340,25 +374,11 @@ class _SummaryPageState extends State<SummaryPage> {
       key: previewContainer,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color.fromRGBO(186, 15, 48, 1),
           title: Text('Summary Page'),
           actions: [
             FlatButton.icon(
                 onPressed: () async {
-                  // takeScreenShot() async {
-                  //   RenderRepaintBoundary boundary =
-                  //       previewContainer.currentContext.findRenderObject();
-                  //   ui.Image image = await boundary.toImage();
-                  //   final directory =
-                  //       (await getApplicationDocumentsDirectory()).path;
-                  //   ByteData byteData =
-                  //       await image.toByteData(format: ui.ImageByteFormat.png);
-                  //   Uint8List pngBytes = byteData.buffer.asUint8List();
-                  //   print(pngBytes);
-                  //   File imgFile = new File('$directory/screenshot.png');
-                  //   imgFile.writeAsBytes(pngBytes);
-                  // }
-
-                  // takeScreenShot();
                   writeOnPdf();
                   await savePdf();
                   Directory docmuentDirectory =
@@ -376,7 +396,7 @@ class _SummaryPageState extends State<SummaryPage> {
                   color: Colors.white,
                 ),
                 label: Text(
-                  'Save Squad',
+                  'Training Drills',
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -419,7 +439,7 @@ class _SummaryPageState extends State<SummaryPage> {
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.blue,
+          backgroundColor: Color.fromRGBO(186, 15, 48, 1),
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.white,
           onTap: onTabTapped,

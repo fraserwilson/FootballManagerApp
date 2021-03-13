@@ -75,7 +75,7 @@ class _RegisterState extends State<Register> {
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black),
                             enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(70.0),
+                                borderRadius: BorderRadius.circular(18.0),
                                 borderSide:
                                     BorderSide(width: 2, color: Colors.black)),
                           ),
@@ -104,7 +104,7 @@ class _RegisterState extends State<Register> {
                                 fontWeight: FontWeight.w400,
                                 color: Colors.black),
                             enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(70.0),
+                                borderRadius: BorderRadius.circular(18.0),
                                 borderSide:
                                     BorderSide(width: 2, color: Colors.black)),
                           ),

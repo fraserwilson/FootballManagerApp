@@ -23,7 +23,7 @@ class _AddEventState extends State<AddEvent> {
         leading: IconButton(
           icon: Icon(
             Icons.clear,
-            color: Colors.blue,
+            color: Color.fromRGBO(186, 15, 48, 1),
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -31,22 +31,27 @@ class _AddEventState extends State<AddEvent> {
         ),
         actions: [
           Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                bool validated = _formKey.currentState.validate();
-                print(validated);
-                if (validated) {
-                  _formKey.currentState.save();
-                  final data =
-                      Map<String, dynamic>.from(_formKey.currentState.value);
-                  String uid = FirebaseAuth.instance.currentUser.uid;
-                  data['userId'] = uid;
-                  await eventDBS.create(data);
+            child: Container(
+              padding: EdgeInsets.only(right: 10),
+              child: ElevatedButton(
+                onPressed: () async {
+                  bool validated = _formKey.currentState.validate();
+                  print(validated);
+                  if (validated) {
+                    _formKey.currentState.save();
+                    final data =
+                        Map<String, dynamic>.from(_formKey.currentState.value);
+                    String uid = FirebaseAuth.instance.currentUser.uid;
+                    data['userId'] = uid;
+                    await eventDBS.create(data);
 
-                  Navigator.pop(context);
-                }
-              },
-              child: Text('Save'),
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text('Save'),
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(186, 15, 48, 1)),
+              ),
             ),
           )
         ],

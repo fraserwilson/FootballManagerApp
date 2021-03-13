@@ -88,7 +88,6 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                   icon: Icon(Icons.settings),
                                   label: Text(''),
                                   onPressed: () {
-                                    print(snapshot.data.docs[index]['docId']);
                                     showModalBottomSheet(
                                       isScrollControlled: true,
                                       context: context,
@@ -103,7 +102,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                 backgroundColor: Color.fromRGBO(
                                                     186, 15, 48, 1),
                                                 title: Text('UPDATE PLAYER'),
-                                                centerTitle: true,
+                                                centerTitle: false,
                                               ),
                                               body: SingleChildScrollView(
                                                 child: Container(
@@ -111,9 +110,6 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                       left: 20.0, right: 20.0),
                                                   child: Column(
                                                     children: <Widget>[
-                                                      Text(snapshot
-                                                              .data.docs[index]
-                                                          ['docId']),
                                                       SizedBox(
                                                         height: 20.0,
                                                       ),
@@ -140,7 +136,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          70.0),
+                                                                          18.0),
                                                               borderSide: BorderSide(
                                                                   width: 2,
                                                                   color: Colors
@@ -173,7 +169,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          70.0),
+                                                                          18.0),
                                                               borderSide: BorderSide(
                                                                   width: 2,
                                                                   color: Colors
@@ -210,7 +206,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          70.0),
+                                                                          18.0),
                                                               borderSide: BorderSide(
                                                                   width: 2,
                                                                   color: Colors
@@ -247,7 +243,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          70.0),
+                                                                          18.0),
                                                               borderSide: BorderSide(
                                                                   width: 2,
                                                                   color: Colors
@@ -284,7 +280,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          70.0),
+                                                                          18.0),
                                                               borderSide: BorderSide(
                                                                   width: 2,
                                                                   color: Colors
@@ -323,7 +319,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
-                                                                          70.0),
+                                                                          18.0),
                                                               borderSide: BorderSide(
                                                                   width: 2,
                                                                   color: Colors
@@ -353,49 +349,76 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                                                   value;
                                                             });
                                                           }),
-                                                      RaisedButton(
-                                                          color: Color.fromRGBO(
-                                                              186, 15, 48, 1),
-                                                          child: Text(
-                                                            'Update',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                          onPressed: () {
-                                                            FirebaseFirestore
-                                                                .instance
-                                                                .collection(
-                                                                    'Players')
-                                                                .doc(snapshot
-                                                                            .data
-                                                                            .docs[
-                                                                        index]
-                                                                    ['docId'])
-                                                                .update({
-                                                              "name":
-                                                                  _name.text,
-                                                              "position":
-                                                                  _position
-                                                                      .text,
-                                                              "attack": int
-                                                                  .parse(_attack
-                                                                      .text),
-                                                              "midfield": int
-                                                                  .parse(_attack
-                                                                      .text),
-                                                              "defense": int
-                                                                  .parse(_attack
-                                                                      .text),
-                                                              "goalkeeping": int
-                                                                  .parse(_attack
-                                                                      .text),
-                                                              "isAvaliable":
-                                                                  _isAvaliable
-                                                            });
-                                                            Navigator.pop(
-                                                                context);
-                                                          }),
+                                                      Container(
+                                                        width: width,
+                                                        child: RaisedButton(
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          18.0),
+                                                            ),
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                    50.0,
+                                                                    15.0,
+                                                                    50.0,
+                                                                    15.0),
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    186,
+                                                                    15,
+                                                                    48,
+                                                                    1),
+                                                            child: Text(
+                                                              'Update',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                  fontSize: 25,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            onPressed: () {
+                                                              FirebaseFirestore
+                                                                  .instance
+                                                                  .collection(
+                                                                      'Players')
+                                                                  .doc(snapshot
+                                                                          .data
+                                                                          .docs[index]
+                                                                      ['docId'])
+                                                                  .update({
+                                                                "name":
+                                                                    _name.text,
+                                                                "position":
+                                                                    _position
+                                                                        .text,
+                                                                "attack": int
+                                                                    .parse(_attack
+                                                                        .text),
+                                                                "midfield": int
+                                                                    .parse(_attack
+                                                                        .text),
+                                                                "defense": int
+                                                                    .parse(_attack
+                                                                        .text),
+                                                                "goalkeeping":
+                                                                    int.parse(
+                                                                        _attack
+                                                                            .text),
+                                                                "isAvaliable":
+                                                                    _isAvaliable
+                                                              });
+                                                              Navigator.pop(
+                                                                  context);
+                                                            }),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),

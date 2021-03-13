@@ -20,6 +20,7 @@ class _ScheduleDetailsState extends State<ScheduleDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(186, 15, 48, 1),
         leading: IconButton(
           icon: Icon(Icons.clear),
           onPressed: () {

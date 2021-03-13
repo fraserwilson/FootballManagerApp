@@ -79,13 +79,13 @@ class _LoginInScreenState extends State<LoginInScreen> {
                             color: Colors.black),
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(20),
-                          hintText: 'Username',
+                          hintText: 'Email',
                           hintStyle: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w400,
                               color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(70.0),
+                              borderRadius: BorderRadius.circular(18.0),
                               borderSide:
                                   BorderSide(width: 2, color: Colors.black)),
                         ),
@@ -115,7 +115,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
                               fontWeight: FontWeight.w400,
                               color: Colors.black),
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(70.0),
+                              borderRadius: BorderRadius.circular(18.0),
                               borderSide:
                                   BorderSide(width: 2, color: Colors.black)),
                         ),

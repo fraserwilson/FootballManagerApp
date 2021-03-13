@@ -39,7 +39,18 @@ class _SettingsFormState extends State<SettingsForm> {
                   ),
                   TextFormField(
                     initialValue: _currentTeamName ?? userData.teamName,
-                    decoration: textInputDecoration,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15),
+                      hintText: 'Team Name',
+                      hintStyle: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
                     validator: (val) =>
                         val.isEmpty ? 'Please enter a team name' : null,
                     onChanged: (val) => setState(() => _currentTeamName = val),
@@ -49,14 +60,25 @@ class _SettingsFormState extends State<SettingsForm> {
                   ),
                   TextFormField(
                     initialValue: _currentManagerName ?? userData.managerName,
-                    decoration: textInputDecoration,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(15),
+                      hintText: 'Manager Name',
+                      hintStyle: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.black)),
+                    ),
                     validator: (val) =>
                         val.isEmpty ? 'Please enter your managers name' : null,
                     onChanged: (val) =>
                         setState(() => _currentManagerName = val),
                   ),
                   SizedBox(
-                    height: height * 0.12,
+                    height: height * 0.1,
                   ),
                   SizedBox(
                     height: height * 0.08,

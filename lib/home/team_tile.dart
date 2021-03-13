@@ -18,8 +18,14 @@ class TeamTile extends StatelessWidget {
             radius: 25.0,
             backgroundImage: AssetImage('assets/team.png'),
           ),
-          title: Text(team.teamName),
-          subtitle: Text('Manager: ${team.managerName}'),
+          title: Text(
+            team.teamName,
+            style: TextStyle(fontFamily: 'SyneMono'),
+          ),
+          subtitle: Text(
+            'Manager: ${team.managerName}',
+            style: TextStyle(fontFamily: 'SyneMono'),
+          ),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => TeamPlayers()));
