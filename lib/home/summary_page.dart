@@ -136,11 +136,12 @@ class _SummaryPageState extends State<SummaryPage> {
   }
 
   Future savePdf() async {
-    Directory docmuentDirectory = await getApplicationDocumentsDirectory();
+    Directory docmuentDirectory = await getExternalStorageDirectory();
 
     String path = docmuentDirectory.path;
 
     File file = File("$path/example.pdf");
+    print(path);
     file.writeAsBytesSync(pdf.save());
   }
 
@@ -382,14 +383,14 @@ class _SummaryPageState extends State<SummaryPage> {
                   writeOnPdf();
                   await savePdf();
                   Directory docmuentDirectory =
-                      await getApplicationDocumentsDirectory();
+                      await getExternalStorageDirectory();
 
                   String path = docmuentDirectory.path;
                   String fullPath = "$path/example.pdf";
-                  Navigator.push(
+                  /*Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PDFPreview(path: fullPath)));
+                          builder: (context) => PDFPreview(path: fullPath)));*/
                 },
                 icon: Icon(
                   Icons.mail,

@@ -32,6 +32,7 @@ class _EventDetailsState extends State<EventDetails> {
             Navigator.pop(context);
           },
         ),
+        title: Text('Results Details'),
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),

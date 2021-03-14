@@ -27,6 +27,8 @@ class _ScheduleDetailsState extends State<ScheduleDetails> {
             Navigator.pop(context);
           },
         ),
+        title: Text('Scheduled Game Details'),
+        centerTitle: true,
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),

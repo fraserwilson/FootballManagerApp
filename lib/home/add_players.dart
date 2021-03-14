@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:screens_ui/models/user.dart';
+import 'package:flutter/services.dart';
 
 class AddPlayersFo extends StatefulWidget {
   @override
@@ -90,6 +91,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _attack,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -110,6 +112,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _midfield,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -130,6 +133,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _defense,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -150,6 +154,7 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _goalkeeping,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -197,12 +202,12 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                                 databaseReference.collection('Players').doc();
                             await ref.set({
                               'uid': user.uid,
-                              'name': _name,
-                              'position': _position,
-                              'attack': _attack,
-                              'midfield': _midfield,
-                              'defense': _defense,
-                              'goalkeeping': _goalkeeping,
+                              'name': _name.text,
+                              'position': _position.text,
+                              'attack': int.parse(_attack.text),
+                              'midfield': int.parse(_midfield.text),
+                              'defense': int.parse(_defense.text),
+                              'goalkeeping': int.parse(_goalkeeping.text),
                               'isAvaliable': _isAvaliable,
                               'docId': ref.id
                             });

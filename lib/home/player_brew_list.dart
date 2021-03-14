@@ -56,6 +56,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
               child: ListView.builder(
                 itemCount: players.length,
                 itemBuilder: (context, index) {
+                  DocumentSnapshot docSnap = snapshot.data.docs[index];
                   return Padding(
                     padding: EdgeInsets.only(top: 8.0),
                     child: Card(
@@ -78,11 +79,50 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                               FlatButton.icon(
                                   icon: Icon(Icons.delete),
                                   label: Text(''),
-                                  onPressed: () {
-                                    FirebaseFirestore.instance
+                                  onPressed: () async {
+                                    /*FirebaseFirestore.instance
                                         .collection('Players')
-                                        .doc(snapshot.data.docs[index])
-                                        .delete();
+                                        .doc(docSnap.id)
+                                        .delete();*/
+                                    final confirm = await showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: Text('Warning!'),
+                                            content: Text(
+                                                'Are you sure you want to delete?'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, true);
+                                                },
+                                                child: Text(
+                                                  'Delete',
+                                                  style: TextStyle(
+                                                      color: Color.fromRGBO(
+                                                          186, 15, 48, 1)),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context, false);
+                                                },
+                                                child: Text(
+                                                  'Cancel',
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.grey.shade700),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ) ??
+                                        false;
+                                    if (confirm) {
+                                      FirebaseFirestore.instance
+                                          .collection('Players')
+                                          .doc(docSnap.id)
+                                          .delete();
+                                    }
                                   }),
                               FlatButton.icon(
                                   icon: Icon(Icons.settings),

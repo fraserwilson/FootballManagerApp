@@ -29,34 +29,67 @@ class Home extends StatelessWidget {
       child: Container(
         child: Scaffold(
           backgroundColor: Colors.white,
+          endDrawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                DrawerHeader(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Options',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Color.fromRGBO(186, 15, 48, 1),
+                        backgroundImage: AssetImage('assets/genysis.png'),
+                        radius: 40,
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(186, 15, 48, 1),
+                  ),
+                ),
+                ListTile(
+                    trailing: Icon(Icons.settings, color: Colors.black),
+                    title: Text('Settings'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      _showSettingsPanel();
+                    }),
+                ListTile(
+                    trailing: Icon(Icons.person, color: Colors.black),
+                    title: Text('Logout'),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      await _auth.signOut();
+                    }),
+              ],
+            ),
+          ),
           appBar: AppBar(
             backgroundColor: Color.fromRGBO(186, 15, 48, 1),
+            leading: CircleAvatar(
+              backgroundColor: Color.fromRGBO(186, 15, 48, 1),
+              backgroundImage: AssetImage('assets/genysis.png'),
+              radius: 40,
+            ),
             title: Text(
               'Team List',
               style: TextStyle(color: Colors.white, fontFamily: 'SyneMono'),
             ),
+            centerTitle: true,
             elevation: 0.0,
-            actions: <Widget>[
-              FlatButton.icon(
-                icon: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-                label: Text(
-                  'logout',
-                  style: TextStyle(color: Colors.white, fontFamily: 'SyneMono'),
-                ),
-                onPressed: () async {
-                  await _auth.signOut();
-                },
-              ),
-              FlatButton.icon(
-                  onPressed: () => _showSettingsPanel(),
-                  icon: Icon(Icons.settings, color: Colors.white),
-                  label: Text('Settings',
-                      style: TextStyle(
-                          color: Colors.white, fontFamily: 'SyneMono')))
-            ],
           ),
           body: SingleChildScrollView(
               child: Column(

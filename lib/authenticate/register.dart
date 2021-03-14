@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'package:screens_ui/shared/loading.dart';
+import 'package:flutter/services.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -50,9 +51,8 @@ class _RegisterState extends State<Register> {
                         Center(
                           child: CircleAvatar(
                             backgroundColor: Colors.white,
-                            backgroundImage:
-                                AssetImage('assets/soccerball.jpg'),
-                            radius: 60.0,
+                            backgroundImage: AssetImage('assets/genysis.png'),
+                            radius: 75,
                           ),
                         ),
                         SizedBox(
@@ -62,6 +62,10 @@ class _RegisterState extends State<Register> {
                           validator: (val) =>
                               val.isEmpty ? 'Enter an email' : null,
                           obscureText: false,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny(
+                                new RegExp(r"\s\b|\b\s"))
+                          ],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 20.0,
@@ -69,7 +73,7 @@ class _RegisterState extends State<Register> {
                               color: Colors.black),
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(20),
-                            hintText: 'Username',
+                            hintText: 'Email',
                             hintStyle: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w400,
@@ -91,6 +95,10 @@ class _RegisterState extends State<Register> {
                               ? 'Enter a password that is 6 characters long'
                               : null,
                           obscureText: true,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny(
+                                new RegExp(r"\s\b|\b\s"))
+                          ],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 20.0,

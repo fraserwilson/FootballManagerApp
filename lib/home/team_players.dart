@@ -23,6 +23,7 @@ class _TeamPlayersState extends State<TeamPlayers> {
 
     return Scaffold(
         appBar: AppBar(
+          title: Text('Squad Members'),
           backgroundColor: Color.fromRGBO(186, 15, 48, 1),
           actions: [
             FlatButton.icon(

@@ -36,6 +36,8 @@ class _ResultsPageState extends State<ResultsPage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(186, 15, 48, 1),
@@ -131,6 +133,7 @@ class _ResultsPageState extends State<ResultsPage> {
                           },
                           trailing: IconButton(
                             icon: Icon(Icons.delete),
+                            color: Colors.black,
                             onPressed: () async {
                               final confirm = await showDialog(
                                     context: context,
@@ -143,7 +146,12 @@ class _ResultsPageState extends State<ResultsPage> {
                                           onPressed: () {
                                             Navigator.pop(context, true);
                                           },
-                                          child: Text('Delete'),
+                                          child: Text(
+                                            'Delete',
+                                            style: TextStyle(
+                                                color: Color.fromRGBO(
+                                                    186, 15, 48, 1)),
+                                          ),
                                         ),
                                         TextButton(
                                           onPressed: () {
@@ -173,17 +181,32 @@ class _ResultsPageState extends State<ResultsPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromRGBO(186, 15, 48, 1),
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AddEvent(
-                        selectedDate: _controller.selectedDay,
-                      )));
-        },
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(
+            left: width * 0.03, right: width * 0.03, bottom: height * 0.01),
+        width: width,
+        child: RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ),
+            padding: EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+            color: Color.fromRGBO(186, 15, 48, 1),
+            child: Text(
+              'Add Result',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddEvent(
+                            selectedDate: _controller.selectedDay,
+                          )));
+            }),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'package:screens_ui/shared/loading.dart';
-//import '../squad_list.dart';
+import 'package:flutter/services.dart';
 
 class LoginInScreen extends StatefulWidget {
   final Function toggleView;
@@ -61,8 +61,8 @@ class _LoginInScreenState extends State<LoginInScreen> {
                       Center(
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
-                          backgroundImage: AssetImage('assets/soccerball.jpg'),
-                          radius: 60.0,
+                          backgroundImage: AssetImage('assets/genysis.png'),
+                          radius: 75,
                         ),
                       ),
                       SizedBox(
@@ -72,6 +72,10 @@ class _LoginInScreenState extends State<LoginInScreen> {
                         validator: (val) =>
                             val.isEmpty ? 'Enter an email' : null,
                         obscureText: false,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(
+                              new RegExp(r"\s\b|\b\s"))
+                        ],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20.0,
@@ -101,6 +105,10 @@ class _LoginInScreenState extends State<LoginInScreen> {
                             ? 'Enter a password that is 6 characters long'
                             : null,
                         obscureText: true,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(
+                              new RegExp(r"\s\b|\b\s"))
+                        ],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25,
