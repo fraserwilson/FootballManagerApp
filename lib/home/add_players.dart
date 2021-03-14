@@ -51,6 +51,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _name,
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter a player name' : null,
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -71,6 +73,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _position,
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter a player position' : null,
                     decoration: InputDecoration(
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -91,6 +95,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _attack,
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter a players attack stat' : null,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
@@ -112,6 +118,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _midfield,
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter a players midfield stat' : null,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
@@ -133,6 +141,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _defense,
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter a players defense stat' : null,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
@@ -154,6 +164,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                   TextFormField(
                     textAlign: TextAlign.center,
                     controller: _goalkeeping,
+                    validator: (val) =>
+                        val.isEmpty ? 'Enter a players goalkeeping stat' : null,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       contentPadding:
@@ -196,26 +208,29 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                               fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          final databaseReference = FirebaseFirestore.instance;
-                          void createPlayer() async {
-                            var ref =
-                                databaseReference.collection('Players').doc();
-                            await ref.set({
-                              'uid': user.uid,
-                              'name': _name.text,
-                              'position': _position.text,
-                              'attack': int.parse(_attack.text),
-                              'midfield': int.parse(_midfield.text),
-                              'defense': int.parse(_defense.text),
-                              'goalkeeping': int.parse(_goalkeeping.text),
-                              'isAvaliable': _isAvaliable,
-                              'docId': ref.id
-                            });
-                            print(ref.id);
-                          }
+                          if (_formKey.currentState.validate()) {
+                            final databaseReference =
+                                FirebaseFirestore.instance;
+                            void createPlayer() async {
+                              var ref =
+                                  databaseReference.collection('Players').doc();
+                              await ref.set({
+                                'uid': user.uid,
+                                'name': _name.text,
+                                'position': _position.text,
+                                'attack': int.parse(_attack.text),
+                                'midfield': int.parse(_midfield.text),
+                                'defense': int.parse(_defense.text),
+                                'goalkeeping': int.parse(_goalkeeping.text),
+                                'isAvaliable': _isAvaliable,
+                                'docId': ref.id
+                              });
+                              print(ref.id);
+                            }
 
-                          createPlayer();
-                          Navigator.pop(context);
+                            createPlayer();
+                            Navigator.pop(context);
+                          }
                         }),
                   )
                 ],

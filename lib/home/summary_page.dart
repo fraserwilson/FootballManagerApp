@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:screens_ui/home/player_details.dart';
 import 'package:screens_ui/home/results.dart';
 import 'package:screens_ui/home/schedule.dart';
 import 'package:screens_ui/home/view_pdf.dart';
@@ -393,7 +394,7 @@ class _SummaryPageState extends State<SummaryPage> {
                           builder: (context) => PDFPreview(path: fullPath)));*/
                 },
                 icon: Icon(
-                  Icons.mail,
+                  Icons.picture_as_pdf,
                   color: Colors.white,
                 ),
                 label: Text(
@@ -421,7 +422,20 @@ class _SummaryPageState extends State<SummaryPage> {
                           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
                           child: ListTile(
                               onTap: () {
-                                //ToDo
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PlayerDetails(
+                                              name: docSnap['name'],
+                                              position: docSnap['position'],
+                                              attack: docSnap['attack'],
+                                              midfield: docSnap['midfield'],
+                                              defense: docSnap['defense'],
+                                              goalkeeping:
+                                                  docSnap['goalkeeping'],
+                                              isAvaliable:
+                                                  docSnap['isAvaliable'],
+                                            )));
                               },
                               leading: CircleAvatar(
                                   backgroundColor: Colors.white,

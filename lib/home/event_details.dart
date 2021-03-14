@@ -23,6 +23,8 @@ class EventDetails extends StatefulWidget {
 class _EventDetailsState extends State<EventDetails> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(186, 15, 48, 1),

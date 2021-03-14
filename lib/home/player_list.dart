@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:screens_ui/home/player_brew_list.dart';
-import 'package:screens_ui/home/player_details.dart';
 import 'package:screens_ui/models/players.dart';
 import 'package:screens_ui/services/database_players.dart';
 
@@ -23,15 +22,6 @@ class _PlayerListState extends State<PlayerList> {
         .where('uid', isEqualTo: firebaseUser.uid)
         .get();
     return qn.docs;
-  }
-
-  navigateToDetails(DocumentSnapshot detail) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DetailPage(
-                  playerDetail: detail,
-                )));
   }
 
   @override
