@@ -13,7 +13,7 @@ class DatabaseService {
   Future updateUserData(String teamName, String managerName) async {
     return await teamCollection
         .doc(uid)
-        .set({'teamName': teamName, 'managerName': managerName});
+        .set({'teamName': teamName, 'managerName': managerName, 'docID': uid});
   }
 
   //list of Team from a snapshot
@@ -21,7 +21,8 @@ class DatabaseService {
     return snapshot.docs.map((doc) {
       return Team(
           teamName: doc.data()['teamName'] ?? '',
-          managerName: doc.data()['managerName'] ?? '');
+          managerName: doc.data()['managerName'] ?? '',
+          docId: doc.data()['docID'] ?? '');
     }).toList();
   }
 

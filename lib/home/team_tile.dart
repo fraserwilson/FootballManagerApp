@@ -10,6 +10,8 @@ class TeamTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
@@ -29,12 +31,41 @@ class TeamTile extends StatelessWidget {
             style: TextStyle(fontFamily: 'SyneMono'),
           ),
           onTap: () {
-            /*String userId = FirebaseAuth.instance.currentUser.uid;
-            FirebaseFirestore.instance.collection('Teams').doc();
-            if (FirebaseFirestore.instance.collection('Teams').doc(userId).toString() ==
-                userId)*/
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TeamPlayers()));
+            print(team.docId);
+            if (team.docId == FirebaseAuth.instance.currentUser.uid) {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TeamPlayers()));
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                        backgroundColor: Color.fromRGBO(186, 15, 48, 1),
+                        scrollable: true,
+                        title: Text(
+                          'Warning!!!!!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        content: StatefulBuilder(builder:
+                            (BuildContext context, StateSetter setState) {
+                          return Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Form(
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    'Please log in with team email to view this teams players',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }));
+                  });
+            }
           },
         ),
       ),

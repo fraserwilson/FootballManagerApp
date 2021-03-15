@@ -223,10 +223,6 @@ class _SummaryPageState extends State<SummaryPage> {
                           }));
                     },
                   );
-                  /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PDFPreview(path: fullPath)));*/
                 },
                 icon: Icon(
                   Icons.picture_as_pdf,
