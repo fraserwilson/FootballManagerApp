@@ -85,6 +85,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: One
+      fonts:
+        - asset: fonts/FredokaOne-Regular.ttf
+    - family: Bebas
+      fonts:
+        - asset: fonts/BebasNeue-Regular.ttf
     - family: SyneMono
       fonts:
         - asset: fonts/SyneMono-Regular.ttf

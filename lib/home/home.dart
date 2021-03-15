@@ -52,7 +52,7 @@ class Home extends StatelessWidget {
                           firebaseUser,
                           style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w200,
                             color: Colors.white,
                           ),
                         ),
