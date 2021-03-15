@@ -29,8 +29,19 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
       resizeToAvoidBottomInset: true,
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        bottom: PreferredSize(
+            preferredSize: Size(100, 50),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                'ADD PLAYERS',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+            )),
         backgroundColor: Color.fromRGBO(186, 15, 48, 1),
-        title: Text('ADD PLAYERS'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -232,7 +243,8 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
                             Navigator.pop(context);
                           }
                         }),
-                  )
+                  ),
+                  SizedBox(height: height * 0.01),
                 ],
               ),
             ),

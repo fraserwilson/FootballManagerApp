@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:screens_ui/home/team_players.dart';
 import 'package:screens_ui/models/teams.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TeamTile extends StatelessWidget {
   final Team team;
@@ -27,6 +29,10 @@ class TeamTile extends StatelessWidget {
             style: TextStyle(fontFamily: 'SyneMono'),
           ),
           onTap: () {
+            /*String userId = FirebaseAuth.instance.currentUser.uid;
+            FirebaseFirestore.instance.collection('Teams').doc();
+            if (FirebaseFirestore.instance.collection('Teams').doc(userId).toString() ==
+                userId)*/
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => TeamPlayers()));
           },

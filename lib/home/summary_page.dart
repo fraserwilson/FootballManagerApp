@@ -20,12 +20,7 @@ class _SummaryPageState extends State<SummaryPage> {
   int _currentIndex = 0;
   bool isAvaliable = true;
   Query query;
-  bool counterAttack = false;
-  bool tikiTaka = false;
-  bool longBalls = false;
-  bool fourFourTwo = false;
-  bool fourThreeThree = false;
-  bool threeFiveTwo = false;
+
   static GlobalKey previewContainer = new GlobalKey();
   final pdf = pw.Document();
 
@@ -155,218 +150,10 @@ class _SummaryPageState extends State<SummaryPage> {
         _currentIndex = index;
       });
       if (index == 0) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-                scrollable: true,
-                title: Text('Playstyles'),
-                content: StatefulBuilder(
-                    builder: (BuildContext context, StateSetter setState) {
-                  return Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Form(
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.0),
-                            child: ListTile(
-                              tileColor: counterAttack
-                                  ? Color.fromRGBO(186, 15, 48, 1)
-                                  : Colors.white,
-                              leading: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 25.0,
-                                  backgroundImage:
-                                      AssetImage('assets/running.jpg')),
-                              title: Text('Counter-Attack',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18)),
-                              subtitle: Text('Fast, reactive free-flowing play',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16)),
-                              onTap: () {
-                                setState(() {
-                                  counterAttack = !counterAttack;
-                                  tikiTaka = false;
-                                  longBalls = false;
-                                });
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.0),
-                            child: ListTile(
-                              tileColor: tikiTaka
-                                  ? Color.fromRGBO(186, 15, 48, 1)
-                                  : Colors.white,
-                              leading: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 25.0,
-                                  backgroundImage:
-                                      AssetImage('assets/passing.png')),
-                              title: Text('Tiki-Taka',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18)),
-                              subtitle: Text(
-                                  'Short passes, with the intent to break down opposition teams',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16)),
-                              onTap: () {
-                                setState(() {
-                                  tikiTaka = !tikiTaka;
-                                  longBalls = false;
-                                  counterAttack = false;
-                                });
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.0),
-                            child: ListTile(
-                              tileColor: longBalls
-                                  ? Color.fromRGBO(186, 15, 48, 1)
-                                  : Colors.white,
-                              leading: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 25.0,
-                                  backgroundImage:
-                                      AssetImage('assets/crossing.png')),
-                              title: Text('Long balls',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18)),
-                              subtitle: Text(
-                                  'Constant crosses into the box, generally after absorbing large amounts of pressure',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16)),
-                              onTap: () {
-                                setState(() {
-                                  longBalls = !longBalls;
-                                  tikiTaka = false;
-                                  counterAttack = false;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }));
-          },
-        );
-      }
-      if (index == 1) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              scrollable: true,
-              title: Text('Team Formations'),
-              content: StatefulBuilder(
-                builder: (BuildContext context, StateSetter setState) {
-                  return Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Form(
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.0),
-                            child: ListTile(
-                              tileColor: fourFourTwo
-                                  ? Color.fromRGBO(186, 15, 48, 1)
-                                  : Colors.white,
-                              leading: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 25.0,
-                                  backgroundImage:
-                                      AssetImage('assets/442.jpg')),
-                              title: Text('4-4-2',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18)),
-                              subtitle: Text(
-                                '4 defenders, 4 midfielders, 2 forwards',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 16),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  fourFourTwo = !fourFourTwo;
-                                  fourThreeThree = false;
-                                  threeFiveTwo = false;
-                                });
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.0),
-                            child: ListTile(
-                              tileColor: fourThreeThree
-                                  ? Color.fromRGBO(186, 15, 48, 1)
-                                  : Colors.white,
-                              leading: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 25.0,
-                                  backgroundImage:
-                                      AssetImage('assets/433.jpg')),
-                              title: Text('4-3-3',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18)),
-                              subtitle: Text(
-                                  '4 defenders, 3 midfielders, 3 forwards',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16)),
-                              onTap: () {
-                                setState(() {
-                                  fourThreeThree = !fourThreeThree;
-                                  fourFourTwo = false;
-                                  threeFiveTwo = false;
-                                });
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 8.0),
-                            child: ListTile(
-                              tileColor: threeFiveTwo
-                                  ? Color.fromRGBO(186, 15, 48, 1)
-                                  : Colors.white,
-                              leading: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 25.0,
-                                  backgroundImage:
-                                      AssetImage('assets/352.png')),
-                              title: Text('3-5-2',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18)),
-                              subtitle: Text(
-                                  '3 defenders, 5 midfielders, 2 forwards',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16)),
-                              onTap: () {
-                                setState(() {
-                                  threeFiveTwo = !threeFiveTwo;
-                                  fourFourTwo = false;
-                                  fourThreeThree = false;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-          },
-        );
-      }
-      if (index == 2) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => SchedulePage()));
       }
-      if (index == 3) {
+      if (index == 1) {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => ResultsPage()));
       }
@@ -388,6 +175,54 @@ class _SummaryPageState extends State<SummaryPage> {
 
                   String path = docmuentDirectory.path;
                   String fullPath = "$path/example.pdf";
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                          scrollable: true,
+                          title: Text(
+                            'Playstyles',
+                            textAlign: TextAlign.center,
+                          ),
+                          content: StatefulBuilder(builder:
+                              (BuildContext context, StateSetter setState) {
+                            return Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Form(
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(
+                                      'PDF has been created and saved to your device. Press the below button to view',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SizedBox(height: height * 0.01),
+                                    FlatButton(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                        ),
+                                        padding: EdgeInsets.fromLTRB(
+                                            50.0, 15.0, 50.0, 15.0),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PDFPreview(
+                                                          path: fullPath)));
+                                        },
+                                        color: Color.fromRGBO(186, 15, 48, 1),
+                                        child: Text(
+                                          'View PDF',
+                                          style: TextStyle(color: Colors.white),
+                                        ))
+                                  ],
+                                ),
+                              ),
+                            );
+                          }));
+                    },
+                  );
                   /*Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -398,7 +233,7 @@ class _SummaryPageState extends State<SummaryPage> {
                   color: Colors.white,
                 ),
                 label: Text(
-                  'Training Drills',
+                  'Training PDF',
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -460,9 +295,6 @@ class _SummaryPageState extends State<SummaryPage> {
           onTap: onTabTapped,
           currentIndex: _currentIndex,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Playstyle'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.time_to_leave), label: 'Formation'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today), label: 'Schedule'),
             BottomNavigationBarItem(

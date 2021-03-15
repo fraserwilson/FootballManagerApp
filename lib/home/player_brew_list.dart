@@ -154,7 +154,23 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                               appBar: AppBar(
                                                 backgroundColor: Color.fromRGBO(
                                                     186, 15, 48, 1),
-                                                title: Text('UPDATE PLAYER'),
+                                                bottom: PreferredSize(
+                                                    preferredSize:
+                                                        Size(100, 50),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 10),
+                                                      child: Text(
+                                                        'UPDATE PLAYERS',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    )),
                                                 centerTitle: true,
                                               ),
                                               body: SingleChildScrollView(
