@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:screens_ui/home/add_games.dart';
 import 'package:screens_ui/home/schedule_details.dart';
+import 'package:screens_ui/shared/loading.dart';
 
 class SchedulePage extends StatefulWidget {
   @override
@@ -98,77 +99,81 @@ class _SchedulePageState extends State<SchedulePage> {
                         isEqualTo: FirebaseAuth.instance.currentUser.uid)
                     .snapshots(),
                 builder: (context, snapshot) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (context, index) {
-                      DocumentSnapshot docSnap = snapshot.data.docs[index];
-                      Timestamp t = docSnap['date'];
-                      DateTime d = DateTime.parse(t.toDate().toString());
-                      String formattedDate = "${d.day}/${d.month}/${d.year}";
-                      return ListTile(
-                          title: Text(docSnap['title']),
-                          subtitle: Text(formattedDate),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ScheduleDetails(
-                                  title: docSnap['title'],
-                                  description: docSnap['description'],
-                                  date: formattedDate,
-                                  userId: docSnap['userId'],
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data.docs.length,
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot docSnap = snapshot.data.docs[index];
+                        Timestamp t = docSnap['date'];
+                        DateTime d = DateTime.parse(t.toDate().toString());
+                        String formattedDate = "${d.day}/${d.month}/${d.year}";
+                        return ListTile(
+                            title: Text(docSnap['title']),
+                            subtitle: Text(formattedDate),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScheduleDetails(
+                                    title: docSnap['title'],
+                                    description: docSnap['description'],
+                                    date: formattedDate,
+                                    userId: docSnap['userId'],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                          trailing: IconButton(
-                            color: Colors.black,
-                            icon: Icon(Icons.delete),
-                            onPressed: () async {
-                              final confirm = await showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: Text('Warning!'),
-                                      content: Text(
-                                          'Are you sure you want to delete?'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context, true);
-                                          },
-                                          child: Text(
-                                            'Delete',
-                                            style: TextStyle(
-                                                color: Color.fromRGBO(
-                                                    186, 15, 48, 1)),
-                                          ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context, false);
-                                          },
-                                          child: Text(
-                                            'Cancel',
-                                            style: TextStyle(
-                                                color: Colors.grey.shade700),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ) ??
-                                  false;
-                              if (confirm) {
-                                FirebaseFirestore.instance
-                                    .collection('schedule')
-                                    .doc(docSnap.id)
-                                    .delete();
-                              }
+                              );
                             },
-                          ));
-                    },
-                  );
+                            trailing: IconButton(
+                              color: Colors.black,
+                              icon: Icon(Icons.delete),
+                              onPressed: () async {
+                                final confirm = await showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text('Warning!'),
+                                        content: Text(
+                                            'Are you sure you want to delete?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context, true);
+                                            },
+                                            child: Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                  color: Color.fromRGBO(
+                                                      186, 15, 48, 1)),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context, false);
+                                            },
+                                            child: Text(
+                                              'Cancel',
+                                              style: TextStyle(
+                                                  color: Colors.grey.shade700),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ) ??
+                                    false;
+                                if (confirm) {
+                                  FirebaseFirestore.instance
+                                      .collection('schedule')
+                                      .doc(docSnap.id)
+                                      .delete();
+                                }
+                              },
+                            ));
+                      },
+                    );
+                  } else {
+                    return Loading();
+                  }
                 }),
           ],
         ),

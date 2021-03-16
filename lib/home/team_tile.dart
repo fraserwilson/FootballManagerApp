@@ -16,6 +16,7 @@ class TeamTile extends StatelessWidget {
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+        elevation: 0,
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.white,
