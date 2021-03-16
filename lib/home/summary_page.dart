@@ -181,7 +181,7 @@ class _SummaryPageState extends State<SummaryPage> {
                       return AlertDialog(
                           scrollable: true,
                           title: Text(
-                            'Playstyles',
+                            'PDF Downloaded',
                             textAlign: TextAlign.center,
                           ),
                           content: StatefulBuilder(builder:

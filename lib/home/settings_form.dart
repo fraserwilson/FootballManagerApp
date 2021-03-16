@@ -78,7 +78,7 @@ class _SettingsFormState extends State<SettingsForm> {
                         setState(() => _currentManagerName = val),
                   ),
                   SizedBox(
-                    height: height * 0.1,
+                    height: height * 0.07,
                   ),
                   SizedBox(
                     height: height * 0.08,

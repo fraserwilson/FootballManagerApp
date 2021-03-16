@@ -84,7 +84,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                             backgroundImage: AssetImage('assets/player.png')),
                         title: Text(snapshot.data.docs[index]['name']),
                         subtitle: Text(
-                            'Position: ${snapshot.data.docs[index]['position']}'),
+                            'Position:${snapshot.data.docs[index]['position']}'),
                         trailing: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
