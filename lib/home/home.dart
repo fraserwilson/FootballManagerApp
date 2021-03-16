@@ -336,7 +336,7 @@ class Home extends StatelessWidget {
             ),
             title: Text(
               'Team List',
-              style: TextStyle(color: Colors.white, fontFamily: 'SyneMono'),
+              style: TextStyle(color: Colors.white),
             ),
             centerTitle: true,
             elevation: 0.0,
@@ -352,10 +352,10 @@ class Home extends StatelessWidget {
                 'Please tap on team tile to view players',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black,
-                    fontFamily: 'SyneMono'),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
               )
             ],
           )),

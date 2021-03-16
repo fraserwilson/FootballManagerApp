@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: MaterialApp(
-            theme: ThemeData(fontFamily: 'One'),
+            theme: ThemeData(fontFamily: 'SyneMono'),
             home: Wrapper())); //Bebas SyneMono
   }
 }

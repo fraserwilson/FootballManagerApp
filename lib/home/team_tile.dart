@@ -24,11 +24,9 @@ class TeamTile extends StatelessWidget {
           ),
           title: Text(
             team.teamName,
-            style: TextStyle(fontFamily: 'SyneMono'),
           ),
           subtitle: Text(
             'Manager: ${team.managerName}',
-            style: TextStyle(fontFamily: 'SyneMono'),
           ),
           onTap: () {
             print(team.docId);
