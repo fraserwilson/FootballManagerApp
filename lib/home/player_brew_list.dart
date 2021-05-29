@@ -137,6 +137,7 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                           .delete();
                                     }
                                   }),
+                              // ignore: deprecated_member_use
                               FlatButton.icon(
                                   icon: Icon(Icons.settings),
                                   label: Text(''),
@@ -150,7 +151,6 @@ class _PlayerBrewListState extends State<PlayerBrewList> {
                                               StateSetter setState) {
                                             return Scaffold(
                                               resizeToAvoidBottomInset: true,
-                                              resizeToAvoidBottomPadding: false,
                                               appBar: AppBar(
                                                 backgroundColor: Color.fromRGBO(
                                                     186, 15, 48, 1),

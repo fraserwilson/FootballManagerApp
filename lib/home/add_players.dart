@@ -27,7 +27,6 @@ class _AddPlayersFoState extends State<AddPlayersFo> {
     final user = Provider.of<ConvertedUser>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         bottom: PreferredSize(
             preferredSize: Size(100, 50),
