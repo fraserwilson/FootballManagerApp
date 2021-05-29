@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:screens_ui/models/user.dart';
+import 'package:screens_ui/services/databases_teams.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create a user object based on a Firebase User
-
   ConvertedUser _userFromFirebaseUser(User user) {
     return user != null ? ConvertedUser(uid: user.uid) : null;
   }
@@ -46,6 +46,10 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
+
+      //create a new document
+      await DatabaseService(uid: user.uid)
+          .updateUserData('Retro FC', 'new manager');
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());

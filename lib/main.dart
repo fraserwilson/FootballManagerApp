@@ -19,7 +19,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<ConvertedUser>.value(
-        value: AuthService().streamuser, child: MaterialApp(home: Wrapper()));
+    return MultiProvider(
+        providers: [
+          StreamProvider<ConvertedUser>.value(
+            value: AuthService().streamuser,
+          ),
+        ],
+        child: MaterialApp(
+            theme: ThemeData(fontFamily: 'SyneMono'),
+            home: Wrapper())); //Bebas SyneMono
   }
 }

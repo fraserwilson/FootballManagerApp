@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:screens_ui/services/auth.dart';
 import 'package:screens_ui/shared/loading.dart';
-//import '../squad_list.dart';
+import 'package:flutter/services.dart';
 
 class LoginInScreen extends StatefulWidget {
   final Function toggleView;
@@ -21,115 +21,161 @@ class _LoginInScreenState extends State<LoginInScreen> {
   String error = ' ';
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return loading
         ? Loading()
         : Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
-              title: Text("Login Screen"),
+              backgroundColor: Color.fromRGBO(186, 15, 48, 1),
+              title: Text(
+                "Login Screen",
+                style: TextStyle(color: Colors.white),
+              ),
               actions: <Widget>[
                 FlatButton.icon(
                     onPressed: () {
                       widget.toggleView();
                     },
-                    icon: Icon(Icons.person),
-                    label: Text("Register"))
+                    icon: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                    label: Text(
+                      "Register",
+                      style: TextStyle(color: Colors.white),
+                    ))
               ],
             ),
-            body: Form(
-              key: _formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    Center(
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/soccerball.jpg'),
-                        backgroundColor: Colors.white,
-                        radius: 60.0,
+            body: Container(
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: height * 0.04,
                       ),
-                    ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    TextFormField(
-                      validator: (val) => val.isEmpty ? 'Enter an email' : null,
-                      obscureText: false,
-                      style: TextStyle(fontSize: 20.0),
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                        hintText: 'Username',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(70.0)),
-                      ),
-                      onChanged: (val) {
-                        setState(() => email = val);
-                      },
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    TextFormField(
-                      validator: (val) => val.length < 6
-                          ? 'Enter a password that is 6 characters long'
-                          : null,
-                      obscureText: true,
-                      style: TextStyle(fontSize: 20.0),
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                        hintText: 'Password',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0)),
-                      ),
-                      onChanged: (val) {
-                        setState(() => password = val);
-                      },
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    Material(
-                      elevation: 5.0,
-                      borderRadius: BorderRadius.circular(30.0),
-                      child: MaterialButton(
-                        padding: EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            setState(() => loading = true);
-                            dynamic result = await _authService
-                                .signInWithEmailandPassword(email, password);
-                            if (result == null) {
-                              setState(() {
-                                error =
-                                    'Could not sign in with those credintials';
-                                loading = false;
-                              });
-                            }
-                          }
-                        },
-                        color: Colors.black,
-                        child: Text(
-                          "Login",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                      Center(
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          backgroundImage: AssetImage('assets/genysis.png'),
+                          radius: 75,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 12.0,
-                    ),
-                    Text(
-                      error,
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 14.0,
+                      SizedBox(
+                        height: height * 0.1,
                       ),
-                    ),
-                  ],
+                      TextFormField(
+                        validator: (val) =>
+                            val.isEmpty ? 'Enter an email' : null,
+                        obscureText: false,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(
+                              new RegExp(r"\s\b|\b\s"))
+                        ],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          hintText: 'Email',
+                          hintStyle: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black)),
+                        ),
+                        onChanged: (val) {
+                          setState(() => email = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: height * 0.05,
+                      ),
+                      TextFormField(
+                        validator: (val) => val.length < 6
+                            ? 'Enter a password that is 6 characters long'
+                            : null,
+                        obscureText: true,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(
+                              new RegExp(r"\s\b|\b\s"))
+                        ],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(20),
+                          hintText: 'Password',
+                          hintStyle: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.black)),
+                        ),
+                        onChanged: (val) {
+                          setState(() => password = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: height * 0.18,
+                      ),
+                      SizedBox(
+                        width: width,
+                        height: height * 0.08,
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                          padding: EdgeInsets.fromLTRB(50.0, 15.0, 50.0, 15.0),
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              setState(() => loading = true);
+                              dynamic result = await _authService
+                                  .signInWithEmailandPassword(email, password);
+                              if (result == null) {
+                                setState(() {
+                                  error =
+                                      'Could not sign in with those credintials';
+                                  loading = false;
+                                });
+                              }
+                            }
+                          },
+                          color: Color.fromRGBO(186, 15, 48, 1),
+                          child: Text(
+                            "Login",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        error,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 14.0,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

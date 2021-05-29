@@ -1,0 +1,365 @@
+Container(
+          child: FutureBuilder(
+              future: _data,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: Text("Loading"),
+                  );
+                } else {
+                  return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Image.asset('assets/player.png'),
+                          title: Text(
+                            snapshot.data[index].data()['name'],
+                          ),
+                          subtitle:
+                              Text(snapshot.data[index].data()['position']),
+                          onTap: () => navigateToDetails(snapshot.data[index]),
+                          trailing: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    print(snapshot.data[index].id);
+                                    FirebaseFirestore.instance
+                                        .collection('Players')
+                                        .doc(snapshot.data[index].id)
+                                        .delete();
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.colorize_sharp),
+                                  onPressed: () {
+                                    print(snapshot.data[index].id);
+                                    FirebaseFirestore.instance
+                                        .collection('Players')
+                                        .doc(snapshot.data[index].id);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                }
+              }),
+        ),
+        
+        
+------------------------------------------------------------------------------------------------------------------------------------------------------
+final players = Provider.of<List<PlayersModel>>(context) ?? [];
+    return FutureBuilder(
+        future: FirebaseFirestore.instance.collection('Players').get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: Text("Loading"),
+            );
+          } else {
+            return ListView.builder(
+              itemCount: players.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Card(
+                        margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+                        child: ListTile(
+                            leading: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 25.0,
+                                backgroundImage:
+                                    AssetImage('assets/player.png')),
+                            title: Text(snapshot.data.docs[index]['name']),
+                            subtitle: Text(
+                                'DocId: ${snapshot.data.docs[index]['docId']}'),
+                            trailing: FlatButton.icon(
+                                icon: Icon(Icons.settings),
+                                label: Text('Edit Players'),
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return Container(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 60.0,
+                                                horizontal: 60.0),
+                                            child: SingleChildScrollView(
+                                                child: Form(
+                                                    key: _formKey,
+                                                    child: Column(
+                                                      children: <Widget>[
+                                                        Text("Edit Player",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    18.0)),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        TextFormField(
+                                                          initialValue: snapshot
+                                                                  .data
+                                                                  .docs[index]
+                                                              ['name'],
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        25),
+                                                          )),
+                                                          validator: (val) => val
+                                                                  .isEmpty
+                                                              ? 'Please enter a name'
+                                                              : null,
+                                                          onChanged: (val) =>
+                                                              setState(() =>
+                                                                  _playerName =
+                                                                      val),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        TextFormField(
+                                                          initialValue: snapshot
+                                                                  .data
+                                                                  .docs[index]
+                                                              ['position'],
+                                                          decoration:
+                                                              InputDecoration(
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        25),
+                                                          )),
+                                                          validator: (val) => val
+                                                                  .isEmpty
+                                                              ? 'Please enter a position'
+                                                              : null,
+                                                          onChanged: (val) =>
+                                                              setState(() =>
+                                                                  _playerPosition =
+                                                                      val),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        Text("Attack Stat",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    12.0)),
+                                                        Slider(
+                                                            value: _attackStat
+                                                                .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _attackStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        Text("Midfield Stat",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    12.0)),
+                                                        Slider(
+                                                            value: _midfieldStat
+                                                                .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _midfieldStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        Text("Defense Stat",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    12.0)),
+                                                        Slider(
+                                                            value: _defenseStat
+                                                                .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _defenseStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        Text("Goalkeeping Stat",
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    12.0)),
+                                                        Slider(
+                                                            value:
+                                                                _goalkeppingStat
+                                                                    .toDouble(),
+                                                            min: 1,
+                                                            max: 10,
+                                                            divisions: 9,
+                                                            onChanged: (val) {
+                                                              setState(() {
+                                                                _goalkeppingStat =
+                                                                    val.toInt();
+                                                              });
+                                                            }),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        Text(
+                                                            'Is this player avaliable?'),
+                                                        Checkbox(
+                                                            tristate: false,
+                                                            value: _isAvaliable,
+                                                            onChanged:
+                                                                (bool value) {
+                                                              setState(() {
+                                                                _isAvaliable =
+                                                                    value;
+                                                              });
+                                                            }),
+                                                        RaisedButton(
+                                                            color: Colors.blue,
+                                                            child: Text(
+                                                              'Edit',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            onPressed: () {
+                                                              if (_formKey
+                                                                  .currentState
+                                                                  .validate()) {
+                                                                FirebaseFirestore
+                                                                    .instance
+                                                                    .collection(
+                                                                        'Players')
+                                                                    .doc(snapshot
+                                                                        .data[
+                                                                            index]
+                                                                        .docId)
+                                                                    .set({
+                                                                  'name': _playerName ??
+                                                                      snapshot
+                                                                          .data
+                                                                          .name,
+                                                                  'position': _playerPosition ??
+                                                                      snapshot
+                                                                          .data
+                                                                          .position,
+                                                                  'attack': _attackStat ??
+                                                                      snapshot
+                                                                          .data
+                                                                          .attack,
+                                                                  'midfield': _midfieldStat ??
+                                                                      snapshot
+                                                                          .data
+                                                                          .midfield,
+                                                                  'defense': _defenseStat ??
+                                                                      snapshot
+                                                                          .data
+                                                                          .defense,
+                                                                  'goalkeeping':
+                                                                      _goalkeppingStat ??
+                                                                          snapshot
+                                                                              .data
+                                                                              .goalkeeping,
+                                                                  'isAvaliable':
+                                                                      _isAvaliable ??
+                                                                          snapshot
+                                                                              .data
+                                                                              .isAvaliable
+                                                                });
+
+                                                                Navigator.pop(
+                                                                    context);
+                                                              }
+                                                            })
+                                                      ],
+                                                    ))));
+                                      });
+                                }))));
+              },
+            );
+          }
+        });
+  }
+
+  final _formKey = GlobalKey<FormState>();
+  String _playerName;
+  String _playerPosition;
+  int _attackStat = 1;
+  int _midfieldStat = 1;
+  int _defenseStat = 1;
+  int _goalkeppingStat = 1;
+  bool _isAvaliable = false;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+writeOnPdf() {
+    pdf.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        margin: pw.EdgeInsets.all(32),
+        build: (pw.Context context) {
+          return <pw.Widget>[
+            pw.Header(level: 0, child: pw.Text('Squad List')),
+            pw.Paragraph(text: 'This will showcase my squad list'),
+            pw.Header(level: 1, child: pw.Text('Second Heading')),
+            pw.Paragraph(
+                text:
+                    'This is the second heading hich will showcase my squad formation and squad playstyle'),
+          ];
+        },
+      ),
+    );
+  }
+
+  Future savePdf() async {
+    Directory docmuentDirectory = await getApplicationDocumentsDirectory();
+
+    String path = docmuentDirectory.path;
+
+    File file = File("$path/example.pdf");
+    file.writeAsBytesSync(pdf.save());
+  }
+
+  writeOnPdf();
+                await savePdf();
+                Directory docmuentDirectory =
+                    await getApplicationDocumentsDirectory();
+
+                String path = docmuentDirectory.path;
+                String fullPath = "$path/example.pdf";
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PDFPreview(path: fullPath)));
+---------------------------------------------------------------------------------------------------------------------------------------------
+var firebaseUser = FirebaseAuth.instance.currentUser;
+                FirebaseFirestore.instance
+                    .collection('Results')
+                    .doc(firebaseUser.uid)
+                    .set({"teamName": _eventController.text}).then((value) {
+                  print('success!');
+                });
